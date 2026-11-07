@@ -1,0 +1,93 @@
+/* ==========================================================================
+   ANTTONIAS - TOKENS DE DISEÑO & VARIABLES GLOBALES
+   Arquitectura: Vanilla CSS Estricto | OKLCH & Display-P3 | 0 !important
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------------
+     1. PALETA BASE (Absorción de Luz & Blanco Marmóreo)
+     ------------------------------------------------------------------------ */
+  /* Fallbacks sRGB */
+  --color-black-srgb: #080808;
+  --color-surface-srgb: #101010;
+  --color-surface-elevated-srgb: #181818;
+  --color-border-srgb: #242424;
+  --color-text-primary-srgb: #f0ede6;
+  --color-text-muted-srgb: #8a8880;
+  --color-text-faint-srgb: #52504b;
+
+  /* Neutros Absolutos OKLCH */
+  --color-black: oklch(0.08 0 0);
+  --color-surface: oklch(0.12 0 0);
+  --color-surface-elevated: oklch(0.16 0 0);
+  --color-border: oklch(0.22 0 0);
+  --color-text-primary: oklch(0.93 0.01 80);   /* Blanco tiza / hueso fúnebre */
+  --color-text-muted: oklch(0.62 0.01 80);
+  --color-text-faint: oklch(0.40 0.01 80);
+
+  /* ------------------------------------------------------------------------
+     2. ACENTO CROMÁTICO (Dual: Cobalto Espectral 80s / Carmín Sangre Seca)
+     Por defecto: Cobalto Espectral (Inspirado en "Azul" y la estética 80s de Fontaines D.C.)
+     ------------------------------------------------------------------------ */
+  --accent-srgb: #3a6894;
+  --accent-hover-srgb: #5286b8;
+  --accent-glow-srgb: rgba(58, 104, 148, 0.35);
+
+  /* Display-P3 Gamut */
+  --accent: color(display-p3 0.23 0.41 0.58);
+  --accent-hover: color(display-p3 0.32 0.52 0.72);
+  --accent-glow: color(display-p3 0.23 0.41 0.58 / 0.35);
+
+  /* Variante Alternativa: Sangre Seca (disponible vía data-accent="blood") */
+  --accent-blood-srgb: #7a1515;
+  --accent-blood: color(display-p3 0.48 0.08 0.05);
+
+  /* ------------------------------------------------------------------------
+     3. TIPOGRAFÍA
+     ------------------------------------------------------------------------ */
+  --font-display: 'Cinzel', 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Escala Fluida (clamp) */
+  --font-size-hero: clamp(2.75rem, 8vw + 1rem, 7.5rem);
+  --font-size-title: clamp(1.85rem, 3.5vw + 0.5rem, 3.75rem);
+  --font-size-subtitle: clamp(1.15rem, 1.8vw + 0.2rem, 1.85rem);
+  --font-size-body: clamp(0.95rem, 0.9vw + 0.1rem, 1.1rem);
+  --font-size-caption: clamp(0.75rem, 0.6vw + 0.1rem, 0.85rem);
+
+  /* ------------------------------------------------------------------------
+     4. RETÍCULA Y ESPACIADO
+     ------------------------------------------------------------------------ */
+  --space-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+  --space-sm: clamp(0.5rem, 1vw, 1rem);
+  --space-md: clamp(1rem, 2vw, 2rem);
+  --space-lg: clamp(2rem, 4vw, 4rem);
+  --space-xl: clamp(4rem, 8vw, 8rem);
+  --container-max: 1400px;
+  --container-padding: clamp(1.25rem, 4vw, 3.5rem);
+
+  /* ------------------------------------------------------------------------
+     5. CAPAS Y ELEVACIÓN (Z-INDEX ESTRICTO)
+     ------------------------------------------------------------------------ */
+  --z-base: 1;
+  --z-content: 10;
+  --z-header: 100;
+  --z-overlay: 500;
+  --z-grain: 999;
+
+  /* ------------------------------------------------------------------------
+     6. FÍSICAS DE TRANSICIÓN
+     ------------------------------------------------------------------------ */
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 180ms;
+  --duration-normal: 320ms;
+  --duration-slow: 650ms;
+}
+
+/* Selector para conmutar a acento Sangre Seca */
+[data-accent="blood"] {
+  --accent: var(--accent-blood);
+  --accent-hover: color(display-p3 0.62 0.12 0.08);
+  --accent-glow: color(display-p3 0.48 0.08 0.05 / 0.35);
+}

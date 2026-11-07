@@ -1,0 +1,193 @@
+---
+// src/components/Footer.astro
+---
+
+<footer class="site-footer" aria-label="Pie de página">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-logo">ANTTONIAS</span>
+        <p class="footer-tagline">
+          ¿QUÉ TAN ROMÁNTICA SERÁ LA MUERTE? // 2026 LOTUS RECORDS
+        </p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Navegación secundaria">
+        <div class="nav-group">
+          <span class="group-title">EXPLORAR</span>
+          <a href="#disco" class="footer-link">DISCO</a>
+          <a href="#gira" class="footer-link">GIRA</a>
+          <a href="#videos" class="footer-link">VIDEOS</a>
+          <a href="#catalogo" class="footer-link">CATÁLOGO</a>
+          <a href="#prensa" class="footer-link">EPK / PRENSA</a>
+        </div>
+
+        <div class="nav-group">
+          <span class="group-title">PLATAFORMAS</span>
+          <a href="https://open.spotify.com/artist/anttonias" target="_blank" rel="noopener noreferrer" class="footer-link">SPOTIFY ↗</a>
+          <a href="https://music.apple.com/cl/artist/anttonias" target="_blank" rel="noopener noreferrer" class="footer-link">APPLE MUSIC ↗</a>
+          <a href="https://www.youtube.com/@anttonias" target="_blank" rel="noopener noreferrer" class="footer-link">YOUTUBE ↗</a>
+          <a href="https://instagram.com/anttoniasoficial" target="_blank" rel="noopener noreferrer" class="footer-link">INSTAGRAM ↗</a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="credits-legal">
+        <p class="copyright-txt">
+          © 2026 ANTTONIAS. TODOS LOS DERECHOS RESERVADOS. LOTUS RECORDS / WARNER MUSIC CHILE.
+        </p>
+        <p class="tech-spec">
+          SITIO OFICIAL DESARROLLADO EN ASTRO 5 Y VANILLA CSS. DESPLIEGUE EDGE EN CLOUDFLARE. CERO !IMPORTANT. CERO PLANTILLAS SINTÉTICAS.
+        </p>
+      </div>
+
+      <div class="back-to-top">
+        <a href="#hero" class="btn-top" aria-label="Volver arriba">
+          <span>SUBIR</span>
+          <span aria-hidden="true">↑</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    position: relative;
+    z-index: var(--z-content);
+    padding: var(--space-xl) 0 3rem;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .footer-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  .footer-top {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  @media (min-width: 860px) {
+    .footer-top {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-width: 360px;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    color: var(--color-text-primary);
+  }
+
+  .footer-tagline {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: var(--color-text-faint);
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+
+  .nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .group-title {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+
+  .footer-link {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--color-text-muted);
+    transition: color var(--duration-fast) ease;
+  }
+
+  .footer-link:hover {
+    color: var(--color-text-primary);
+  }
+
+  .footer-bottom {
+    padding-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: space-between;
+  }
+
+  @media (min-width: 768px) {
+    .footer-bottom {
+      flex-direction: row;
+      align-items: flex-end;
+    }
+  }
+
+  .credits-legal {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .copyright-txt {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--color-text-muted);
+  }
+
+  .tech-spec {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    color: var(--color-text-faint);
+  }
+
+  .btn-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+    padding: 0.5rem 0.85rem;
+    border: 1px solid var(--color-border);
+    transition: color var(--duration-fast) ease,
+                border-color var(--duration-fast) ease;
+  }
+
+  .btn-top:hover {
+    color: var(--color-text-primary);
+    border-color: var(--accent);
+  }
+</style>

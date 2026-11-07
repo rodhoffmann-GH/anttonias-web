@@ -1,0 +1,240 @@
+---
+// src/components/Nav.astro
+---
+
+<header class="site-header" id="site-header">
+  <div class="nav-container">
+    <a href="#hero" class="nav-logo" aria-label="Anttonias - Inicio">
+      <span class="logo-text">ANTTONIAS</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a href="#disco" class="nav-link">DISCO</a>
+      <a href="#gira" class="nav-link">GIRA</a>
+      <a href="#videos" class="nav-link">VIDEOS</a>
+      <a href="#catalogo" class="nav-link">CATÁLOGO</a>
+      <a href="#prensa" class="nav-link">PRENSA</a>
+    </nav>
+
+    <div class="nav-status">
+      <span class="status-pulse" aria-hidden="true"></span>
+      <span class="status-label">NUEVO DISCO DISPONIBLE</span>
+    </div>
+
+    <!-- Toggle Móvil Accesible -->
+    <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú de navegación">
+      <span class="toggle-bar"></span>
+      <span class="toggle-bar"></span>
+    </button>
+  </div>
+
+  <!-- Drawer Móvil -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav class="mobile-nav-links">
+      <a href="#disco" class="mobile-nav-link">DISCO</a>
+      <a href="#gira" class="mobile-nav-link">GIRA</a>
+      <a href="#videos" class="mobile-nav-link">VIDEOS</a>
+      <a href="#catalogo" class="mobile-nav-link">CATÁLOGO</a>
+      <a href="#prensa" class="mobile-nav-link">PRENSA / EPK</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: var(--z-header);
+    padding: 1.25rem 0;
+    background: linear-gradient(to bottom, rgba(8, 8, 8, 0.85) 0%, rgba(8, 8, 8, 0) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: background-color var(--duration-normal) var(--ease-cinematic),
+                border-color var(--duration-normal) var(--ease-cinematic),
+                padding var(--duration-normal) var(--ease-cinematic);
+  }
+
+  .nav-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .logo-text {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 0.28em;
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: none;
+    align-items: center;
+    gap: 2.25rem;
+  }
+
+  @media (min-width: 860px) {
+    .nav-links {
+      display: flex;
+    }
+  }
+
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    color: var(--color-text-muted);
+    transition: color var(--duration-fast) ease, letter-spacing var(--duration-fast) ease;
+    position: relative;
+    padding: 0.25rem 0;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text-primary);
+    letter-spacing: 0.22em;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background-color: var(--accent);
+    transition: width var(--duration-fast) var(--ease-cinematic);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-status {
+    display: none;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--color-text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.35rem 0.75rem;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  @media (min-width: 1024px) {
+    .nav-status {
+      display: flex;
+    }
+  }
+
+  .status-pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse 2.5s infinite ease-in-out;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+
+  .mobile-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (min-width: 860px) {
+    .mobile-toggle {
+      display: none;
+    }
+  }
+
+  .toggle-bar {
+    width: 24px;
+    height: 1px;
+    background-color: var(--color-text-primary);
+    transition: transform var(--duration-normal) var(--ease-cinematic);
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background: rgba(8, 8, 8, 0.98);
+    backdrop-filter: blur(16px);
+    padding: 3rem 2rem;
+    flex-direction: column;
+    z-index: calc(var(--z-header) - 1);
+  }
+
+  .mobile-menu.is-open {
+    display: flex;
+  }
+
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .mobile-nav-link {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.2em;
+    color: var(--color-text-primary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 1rem;
+  }
+</style>
+
+<script>
+  const toggleBtn = document.getElementById('mobile-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+  if (toggleBtn && menu) {
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('is-open');
+      toggleBtn.setAttribute('aria-expanded', String(isOpen));
+      menu.setAttribute('aria-hidden', String(!isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('is-open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        menu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+</script>

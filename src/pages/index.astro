@@ -1,0 +1,32 @@
+---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import AlbumFeature from '../components/AlbumFeature.astro';
+import TourDates from '../components/TourDates.astro';
+import Cinema from '../components/Cinema.astro';
+import Discography from '../components/Discography.astro';
+import Gallery from '../components/Gallery.astro';
+import PressKit from '../components/PressKit.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="ANTTONIAS // Sitio Oficial // ¿Qué tan romántica será la muerte?"
+  description="Sitio oficial de Anttonias. Quinteto de rock alternativo y post-punk. Nuevo álbum '¿Qué tan romántica será la muerte?' disponible vía Lotus Records."
+>
+  <Nav />
+  
+  <main id="contenido-principal">
+    <Hero />
+    <AlbumFeature />
+    <TourDates />
+    <Cinema />
+    <Discography />
+    <Gallery />
+    <PressKit />
+  </main>
+
+  <Footer />
+</Layout>

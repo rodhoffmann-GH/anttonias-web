@@ -1,0 +1,256 @@
+---
+// src/components/Discography.astro
+
+const releases = [
+  {
+    title: "¿Qué tan romántica será la muerte?",
+    type: "ÁLBUM LP // 11 CANCIONES",
+    year: "NOVIEMBRE 2026",
+    label: "LOTUS RECORDS",
+    image: "/assets/images/anttonias-cementerio-03.jpg",
+    desc: "Segundo álbum conceptual de estudio en cinco actos. Grabado en Estudios del Sur.",
+    highlight: "LANZAMIENTO VIGENTE",
+    spotify: "https://open.spotify.com/artist/anttonias"
+  },
+  {
+    title: "Anttonias",
+    type: "ÁLBUM DEBUT LP // 7 CANCIONES",
+    year: "AGOSTO 2025",
+    label: "INDEPENDIENTE",
+    image: "/assets/images/anttonias-debut-rod-659.jpg",
+    desc: "Álbum homónimo debut. Incluye sencillos como 'Atado a tu sentimiento', 'Dulces corazones' y 'Almendra'. Fotografía por Rod Hoffmann.",
+    highlight: "DEBUT HISTÓRICO",
+    spotify: "https://open.spotify.com/artist/anttonias"
+  },
+  {
+    title: "Atado a tu sentimiento",
+    type: "SENCILLO // MASTER",
+    year: "2024",
+    label: "INDEPENDIENTE",
+    image: "/assets/images/anttonias-debut-rod-659.jpg",
+    desc: "Primer gran himno subterráneo que definió las coordenadas sónicas de la banda.",
+    highlight: "PRIMER HIMNO",
+    spotify: "https://open.spotify.com/artist/anttonias"
+  }
+];
+---
+
+<section class="discography-section" id="catalogo" aria-label="Catálogo discográfico completo">
+  <div class="disco-container">
+    <div class="disco-header">
+      <span class="section-tag">// ARCHIVO HISTÓRICO // OBRAS COMPLETAS</span>
+      <h2 class="section-title">DISCOGRAFÍA</h2>
+      <p class="disco-lead">
+        El cuerpo de obra completo de Anttonias: desde sus orígenes independientes en el sector poniente de Santiago hasta el universo fúnebre de su última producción con Lotus Records.
+      </p>
+    </div>
+
+    <div class="releases-grid">
+      {releases.map((r) => (
+        <article class="release-card">
+          <div class="release-visual">
+            <img 
+              src={r.image} 
+              alt={`Carátula de ${r.title}`}
+              class="release-cover"
+              loading="lazy"
+            />
+            <span class="badge-highlight">{r.highlight}</span>
+          </div>
+
+          <div class="release-body">
+            <div class="release-meta-top">
+              <span class="release-year">{r.year}</span>
+              <span class="release-label">{r.label}</span>
+            </div>
+
+            <h3 class="release-title">{r.title}</h3>
+            <span class="release-type">{r.type}</span>
+            <p class="release-desc">{r.desc}</p>
+
+            <div class="release-footer">
+              <a href={r.spotify} target="_blank" rel="noopener noreferrer" class="link-listen">
+                <span>ESCUCHAR EN SPOTIFY</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .discography-section {
+    position: relative;
+    z-index: var(--z-content);
+    padding: var(--space-xl) 0;
+    background: var(--color-black);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .disco-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  .disco-header {
+    max-width: 780px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-title);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .disco-lead {
+    font-size: var(--font-size-body);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .releases-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .releases-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .release-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    transition: border-color var(--duration-fast) ease,
+                transform var(--duration-fast) var(--ease-cinematic);
+  }
+
+  .release-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .release-visual {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: var(--color-black);
+  }
+
+  .release-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(115%);
+    transition: transform var(--duration-slow) var(--ease-cinematic);
+  }
+
+  .release-card:hover .release-cover {
+    transform: scale(1.04);
+  }
+
+  .badge-highlight {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.35rem 0.65rem;
+    background: rgba(8, 8, 8, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: var(--color-text-primary);
+    backdrop-filter: blur(6px);
+  }
+
+  .release-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 0.5rem;
+  }
+
+  .release-meta-top {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+  }
+
+  .release-year {
+    color: var(--accent);
+  }
+
+  .release-label {
+    color: var(--color-text-faint);
+  }
+
+  .release-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    letter-spacing: 0.05em;
+    color: var(--color-text-primary);
+    margin-top: 0.25rem;
+  }
+
+  .release-type {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--color-text-muted);
+  }
+
+  .release-desc {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+    margin-top: 0.5rem;
+    flex: 1;
+  }
+
+  .release-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .link-listen {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--color-text-primary);
+    transition: color var(--duration-fast) ease;
+  }
+
+  .link-listen:hover {
+    color: var(--accent);
+  }
+</style>

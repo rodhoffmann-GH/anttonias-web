@@ -1,0 +1,302 @@
+---
+// src/components/TourDates.astro
+
+const shows = [
+  {
+    date: "28 NOV 2026",
+    city: "SANTIAGO, CL",
+    venue: "SALA METRÓNOMO",
+    note: "SHOW LANZAMIENTO OFICIAL ÁLBUM",
+    status: "TICKETS",
+    link: "https://puntoticket.com"
+  },
+  {
+    date: "05 DIC 2026",
+    city: "VALPARAÍSO, CL",
+    venue: "EL HUERTO",
+    note: "CICLO INDIE SUBTERRÁNEO",
+    status: "TICKETS",
+    link: "https://passline.com"
+  },
+  {
+    date: "12 DIC 2026",
+    city: "CONCEPCIÓN, CL",
+    venue: "CASA DE SALUD",
+    note: "NOCHE POST-PUNK",
+    status: "TICKETS",
+    link: "https://passline.com"
+  },
+  {
+    date: "09 ENE 2027",
+    city: "QUILPUÉ, CL",
+    venue: "TROTAMUNDOS TERRAZA",
+    note: "TEMPORADA DE VERANO",
+    status: "TICKETS",
+    link: "https://passline.com"
+  },
+  {
+    date: "23 ENE 2027",
+    city: "SANTIAGO, CL",
+    venue: "MATUCANA 100",
+    note: "FESTIVAL DE GUITARRAS",
+    status: "SOLD OUT",
+    link: "#"
+  }
+];
+---
+
+<section class="tour-section" id="gira" aria-label="Fechas de conciertos y gira en vivo">
+  <div class="tour-container">
+    <div class="tour-header">
+      <div class="tour-title-group">
+        <span class="section-tag">// EN VIVO // GIRA 2026 - 2027</span>
+        <h2 class="section-title">FECHAS DE CONCIERTOS</h2>
+      </div>
+      <p class="tour-subtitle">
+        Presentación oficial en vivo de <em>¿Qué tan romántica será la muerte?</em> en salas y festivales.
+      </p>
+    </div>
+
+    <div class="tour-table" role="table" aria-label="Lista de conciertos">
+      <div class="table-head" role="row">
+        <span role="columnheader" class="col-date">FECHA</span>
+        <span role="columnheader" class="col-city">CIUDAD</span>
+        <span role="columnheader" class="col-venue">RECINTO / EVENTO</span>
+        <span role="columnheader" class="col-action">ACCESO</span>
+      </div>
+
+      <div class="table-body">
+        {shows.map((s) => (
+          <div class="tour-row" role="row">
+            <div class="row-cell cell-date" role="cell">
+              <span class="date-txt">{s.date}</span>
+            </div>
+            <div class="row-cell cell-city" role="cell">
+              <span class="city-txt">{s.city}</span>
+            </div>
+            <div class="row-cell cell-venue" role="cell">
+              <span class="venue-name">{s.venue}</span>
+              <span class="venue-note">{s.note}</span>
+            </div>
+            <div class="row-cell cell-action" role="cell">
+              {s.status === "SOLD OUT" ? (
+                <span class="badge-sold-out">AGOTADO</span>
+              ) : (
+                <a href={s.link} target="_blank" rel="noopener noreferrer" class="btn-ticket">
+                  <span>ENTRADAS</span>
+                  <span class="arrow-ext" aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="tour-footer">
+      <p class="booking-notice">
+        Para contrataciones en festivales y salas: <a href="mailto:booking@lotuspro.cl" class="booking-mail">cristobal@anttonias.com</a> / <span class="label-lotus">LOTUS RECORDS</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tour-section {
+    position: relative;
+    z-index: var(--z-content);
+    padding: var(--space-xl) 0;
+    background: var(--color-black);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .tour-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  .tour-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .tour-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-title);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    color: var(--color-text-primary);
+  }
+
+  .tour-subtitle {
+    font-size: var(--font-size-body);
+    color: var(--color-text-muted);
+    max-width: 420px;
+  }
+
+  .tour-table {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .table-head {
+    display: none;
+    padding: 1rem 1.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--color-border);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    color: var(--color-text-faint);
+  }
+
+  @media (min-width: 860px) {
+    .table-head {
+      display: grid;
+      grid-template-columns: 180px 180px 1fr 140px;
+      gap: 1.5rem;
+      align-items: center;
+    }
+  }
+
+  .tour-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background-color var(--duration-fast) ease;
+  }
+
+  .tour-row:last-child {
+    border-bottom: none;
+  }
+
+  .tour-row:hover {
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  @media (min-width: 860px) {
+    .tour-row {
+      display: grid;
+      grid-template-columns: 180px 180px 1fr 140px;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 1.5rem 1.75rem;
+    }
+  }
+
+  .date-txt {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    color: var(--color-text-primary);
+  }
+
+  .city-txt {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    color: var(--color-text-muted);
+  }
+
+  .cell-venue {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .venue-name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    letter-spacing: 0.06em;
+    color: var(--color-text-primary);
+  }
+
+  .venue-note {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    color: var(--color-text-faint);
+  }
+
+  .btn-ticket {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.25rem;
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    transition: background-color var(--duration-fast) ease,
+                border-color var(--duration-fast) ease,
+                color var(--duration-fast) ease;
+  }
+
+  .btn-ticket:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--color-text-primary);
+  }
+
+  .badge-sold-out {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 1.25rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-text-faint);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+  }
+
+  .tour-footer {
+    margin-top: 1.5rem;
+    text-align: right;
+  }
+
+  .booking-notice {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-faint);
+  }
+
+  .booking-mail {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .label-lotus {
+    color: var(--color-text-muted);
+  }
+</style>

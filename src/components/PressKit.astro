@@ -1,0 +1,349 @@
+---
+// src/components/PressKit.astro
+---
+
+<section class="presskit-section" id="prensa" aria-label="Kit de prensa y contacto oficial">
+  <div class="presskit-container">
+    <div class="presskit-header">
+      <span class="section-tag">// RECURSOS DE PRENSA // EPK ABIERTO</span>
+      <h2 class="section-title">DOSSIER & CONTACTO</h2>
+      <p class="presskit-lead">
+        Información técnica, biografía oficial y material fotográfico en alta resolución para programadores de festivales, salas de conciertos y medios especializados.
+      </p>
+    </div>
+
+    <div class="presskit-grid">
+      <!-- Columna Izquierda: Biografía Oficial -->
+      <div class="bio-panel">
+        <h3 class="panel-heading">BIOGRAFÍA OFICIAL</h3>
+        <div class="bio-text">
+          <p>
+            <strong>Anttonias</strong> es una banda de indie rock y post-punk originaria del sector poniente de Santiago de Chile (Padre Hurtado). El proyecto está integrado por <strong>Antonia Holzapfel</strong> (voz principal), <strong>Diego Sanzana</strong> (guitarra), <strong>Oscar Concha</strong> (guitarra), <strong>Felipe Sanzana</strong> (bajo) y <strong>Agustín Plaza</strong> (batería).
+          </p>
+          <p>
+            Con una sonoridad que bebe del filo guitarrero de los años 80 —con ecos a The Cure, Joy Division y The Stone Roses— la agrupación consolidó su primer impacto en la escena alternativa con su disco debut homónimo (2025) y su tema insignia <em>"Atado a tu sentimiento"</em>.
+          </p>
+          <p>
+            En noviembre de 2026, la banda da el salto definitivo con su segundo álbum de estudio, <em>"¿Qué tan romántica será la muerte?"</em>, lanzado bajo el sello <strong>Lotus Records</strong> con distribución de Warner Music Chile. Producido en Estudios del Sur, el disco es una obra conceptual estructurada en cinco actos que transita por el luto, la rabia visceral y la reconciliación existencial, acompañada de una dirección visual en blanco y negro registrada en el Cementerio General de Recoleta.
+          </p>
+        </div>
+
+        <div class="members-manifest">
+          <span class="manifest-label">FORMACIÓN:</span>
+          <ul class="members-list">
+            <li><strong>Antonia Holzapfel:</strong> Voz</li>
+            <li><strong>Diego Sanzana:</strong> Guitarra</li>
+            <li><strong>Oscar Concha:</strong> Guitarra</li>
+            <li><strong>Felipe Sanzana:</strong> Bajo</li>
+            <li><strong>Agustín Plaza:</strong> Batería</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Descargas Técnicas y Contacto -->
+      <div class="resources-panel">
+        <div class="downloads-block">
+          <h3 class="panel-heading">ARCHIVOS TÉCNICOS & DESCARGAS</h3>
+          <div class="download-items">
+            <div class="download-card">
+              <div class="card-info">
+                <span class="card-title">PACK FOTOS DE PRENSA (3000px Hi-Res)</span>
+                <span class="card-desc">Sesión Cementerio General en blanco y negro (JPG 300dpi / RAW)</span>
+              </div>
+              <a href="/assets/images/anttonias-cementerio-03.jpg" download="Anttonias_Prensa_Cementerio.jpg" class="btn-download">
+                <span>DESCARGAR</span>
+                <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+
+            <div class="download-card">
+              <div class="card-info">
+                <span class="card-title">DOSSIER DE PRENSA & BIO (PDF)</span>
+                <span class="card-desc">Ficha biográfica completa, clipping de prensa y discografía</span>
+              </div>
+              <a href="#contacto-booking" class="btn-download">
+                <span>SOLICITAR</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+
+            <div class="download-card">
+              <div class="card-info">
+                <span class="card-title">RIDER TÉCNICO & STAGE PLOT</span>
+                <span class="card-desc">Canales de audio, microfonía, monitoreo y distribución de escenario</span>
+              </div>
+              <a href="#contacto-booking" class="btn-download">
+                <span>SOLICITAR</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-block" id="contacto-booking">
+          <h3 class="panel-heading">MANAGEMENT & BOOKING</h3>
+          <div class="contact-details">
+            <div class="contact-entry">
+              <span class="entry-role">MANAGEMENT GENERAL</span>
+              <span class="entry-name">Cristóbal Hoffmann</span>
+              <a href="mailto:cristobal@anttonias.com" class="entry-link">cristobal@anttonias.com</a>
+            </div>
+
+            <div class="contact-entry">
+              <span class="entry-role">SELLO DISCOGRÁFICO & BOOKING</span>
+              <span class="entry-name">Lotus Records / Warner Music</span>
+              <a href="mailto:booking@lotuspro.cl" class="entry-link">booking@lotuspro.cl</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .presskit-section {
+    position: relative;
+    z-index: var(--z-content);
+    padding: var(--space-xl) 0;
+    background: var(--color-black);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .presskit-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  .presskit-header {
+    max-width: 780px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-title);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .presskit-lead {
+    font-size: var(--font-size-body);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .presskit-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 900px) {
+    .presskit-grid {
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .panel-heading {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    color: var(--color-text-faint);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .bio-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .bio-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    font-size: var(--font-size-body);
+    color: var(--color-text-muted);
+    line-height: 1.75;
+  }
+
+  .bio-text strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .members-manifest {
+    margin-top: 1rem;
+    padding: 1.25rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+  }
+
+  .manifest-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .members-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 500px) {
+    .members-list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .members-list strong {
+    color: var(--color-text-primary);
+  }
+
+  .resources-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .download-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .download-card {
+    padding: 1.25rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: border-color var(--duration-fast) ease;
+  }
+
+  @media (min-width: 540px) {
+    .download-card {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .download-card:hover {
+    border-color: var(--accent);
+  }
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    color: var(--color-text-primary);
+  }
+
+  .card-desc {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--color-text-faint);
+  }
+
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.15rem;
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    align-self: flex-start;
+    transition: background-color var(--duration-fast) ease,
+                border-color var(--duration-fast) ease,
+                color var(--duration-fast) ease;
+  }
+
+  @media (min-width: 540px) {
+    .btn-download {
+      align-self: center;
+    }
+  }
+
+  .btn-download:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--color-text-primary);
+  }
+
+  .contact-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .contact-entry {
+    padding: 1.25rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .entry-role {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+  }
+
+  .entry-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: var(--color-text-primary);
+  }
+
+  .entry-link {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .entry-link:hover {
+    color: var(--color-text-primary);
+  }
+</style>
