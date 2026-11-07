@@ -1,12 +1,16 @@
 ---
 // src/components/Footer.astro
+import Logo from './Logo.astro';
 ---
 
 <footer class="site-footer" aria-label="Pie de página">
   <div class="footer-container">
     <div class="footer-top">
       <div class="footer-brand">
-        <span class="footer-logo">ANTTONIAS</span>
+        <a href="#hero" aria-label="Anttonias">
+          <Logo class="footer-logo-svg" />
+          <span class="sr-only">ANTTONIAS</span>
+        </a>
         <p class="footer-tagline">
           ¿QUÉ TAN ROMÁNTICA SERÁ LA MUERTE? // 2026 LOTUS RECORDS
         </p>
@@ -90,12 +94,27 @@
     max-width: 360px;
   }
 
-  .footer-logo {
-    font-family: var(--font-display);
-    font-size: 1.6rem;
-    font-weight: 800;
-    letter-spacing: 0.25em;
+  .footer-logo-svg {
+    height: 48px;
+    width: auto;
     color: var(--color-text-primary);
+    transition: color var(--duration-fast) ease;
+  }
+
+  .footer-logo-svg:hover {
+    color: var(--color-accent-ghost);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .footer-tagline {
