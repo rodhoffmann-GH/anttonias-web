@@ -22,6 +22,8 @@ Thumbs.db
 
 # Diagnostic & Intermediate Scaffolding
 raw-masters/
+vault-staging/
+public/assets/images/gallery/
 public/inspect.html
 public/assets/fonts/
 public/assets/video/samples/

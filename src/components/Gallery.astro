@@ -1,129 +1,73 @@
 ---
 // src/components/Gallery.astro
 
-const photos = [
+const VAULT_BASE = "https://vault-anttonias.rod.cl/gallery";
+
+const rawPhotos = [
   {
     id: "photo-01",
     alt: "Anttonias en el Cementerio General de Recoleta",
     credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-    gridAvif: "/assets/images/gallery/photo-01-800.avif",
-    gridWebp: "/assets/images/gallery/photo-01-800.webp",
-    gridJpg: "/assets/images/gallery/photo-01-800.jpg",
-    lightboxAvif: "/assets/images/gallery/photo-01-2560.avif",
-    lightboxWebp: "/assets/images/gallery/photo-01-2560.webp",
-    lightboxJpg: "/assets/images/gallery/photo-01-2560.jpg",
   },
   {
     id: "photo-02",
     alt: "Antonia Holzapfel en primer plano",
     credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-    gridAvif: "/assets/images/gallery/photo-02-800.avif",
-    gridWebp: "/assets/images/gallery/photo-02-800.webp",
-    gridJpg: "/assets/images/gallery/photo-02-800.jpg",
-    lightboxAvif: "/assets/images/gallery/photo-02-2560.avif",
-    lightboxWebp: "/assets/images/gallery/photo-02-2560.webp",
-    lightboxJpg: "/assets/images/gallery/photo-02-2560.jpg",
   },
   {
     id: "photo-03",
     alt: "Banda entre sepulcros y cruces de hierro",
     credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-    gridAvif: "/assets/images/gallery/photo-03-800.avif",
-    gridWebp: "/assets/images/gallery/photo-03-800.webp",
-    gridJpg: "/assets/images/gallery/photo-03-800.jpg",
-    lightboxAvif: "/assets/images/gallery/photo-03-2560.avif",
-    lightboxWebp: "/assets/images/gallery/photo-03-2560.webp",
-    lightboxJpg: "/assets/images/gallery/photo-03-2560.jpg",
   },
   {
     id: "photo-04",
     alt: "Detalle de lápidas y perspectiva fúnebre",
     credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-    gridAvif: "/assets/images/gallery/photo-04-800.avif",
-    gridWebp: "/assets/images/gallery/photo-04-800.webp",
-    gridJpg: "/assets/images/gallery/photo-04-800.jpg",
-    lightboxAvif: "/assets/images/gallery/photo-04-2560.avif",
-    lightboxWebp: "/assets/images/gallery/photo-04-2560.webp",
-    lightboxJpg: "/assets/images/gallery/photo-04-2560.jpg",
   },
   {
     id: "photo-05",
     alt: "Retrato de banda frente al mausoleo",
     credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-    gridAvif: "/assets/images/gallery/photo-05-800.avif",
-    gridWebp: "/assets/images/gallery/photo-05-800.webp",
-    gridJpg: "/assets/images/gallery/photo-05-800.jpg",
-    lightboxAvif: "/assets/images/gallery/photo-05-2560.avif",
-    lightboxWebp: "/assets/images/gallery/photo-05-2560.webp",
-    lightboxJpg: "/assets/images/gallery/photo-05-2560.jpg",
   },
   {
     id: "photo-06",
     alt: "Guitarras y arquitectura del Cementerio General",
     credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-    gridAvif: "/assets/images/gallery/photo-06-800.avif",
-    gridWebp: "/assets/images/gallery/photo-06-800.webp",
-    gridJpg: "/assets/images/gallery/photo-06-800.jpg",
-    lightboxAvif: "/assets/images/gallery/photo-06-2560.avif",
-    lightboxWebp: "/assets/images/gallery/photo-06-2560.webp",
-    lightboxJpg: "/assets/images/gallery/photo-06-2560.jpg",
   },
   {
     id: "photo-07",
     alt: "Perspectiva diagonal entre tumbas",
     credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-    gridAvif: "/assets/images/gallery/photo-07-800.avif",
-    gridWebp: "/assets/images/gallery/photo-07-800.webp",
-    gridJpg: "/assets/images/gallery/photo-07-800.jpg",
-    lightboxAvif: "/assets/images/gallery/photo-07-2560.avif",
-    lightboxWebp: "/assets/images/gallery/photo-07-2560.webp",
-    lightboxJpg: "/assets/images/gallery/photo-07-2560.jpg",
   },
   {
     id: "photo-08",
     alt: "Atmósfera de niebla y luz de cementerio",
     credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-    gridAvif: "/assets/images/gallery/photo-08-800.avif",
-    gridWebp: "/assets/images/gallery/photo-08-800.webp",
-    gridJpg: "/assets/images/gallery/photo-08-800.jpg",
-    lightboxAvif: "/assets/images/gallery/photo-08-2560.avif",
-    lightboxWebp: "/assets/images/gallery/photo-08-2560.webp",
-    lightboxJpg: "/assets/images/gallery/photo-08-2560.jpg",
   },
   {
     id: "photo-09",
     alt: "Retrato coral de Anttonias en el pasaje de criptas",
     credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-    gridAvif: "/assets/images/gallery/photo-09-800.avif",
-    gridWebp: "/assets/images/gallery/photo-09-800.webp",
-    gridJpg: "/assets/images/gallery/photo-09-800.jpg",
-    lightboxAvif: "/assets/images/gallery/photo-09-2560.avif",
-    lightboxWebp: "/assets/images/gallery/photo-09-2560.webp",
-    lightboxJpg: "/assets/images/gallery/photo-09-2560.jpg",
   },
   {
     id: "photo-10",
     alt: "Composición fúnebre en blanco y negro",
     credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-    gridAvif: "/assets/images/gallery/photo-10-800.avif",
-    gridWebp: "/assets/images/gallery/photo-10-800.webp",
-    gridJpg: "/assets/images/gallery/photo-10-800.jpg",
-    lightboxAvif: "/assets/images/gallery/photo-10-2560.avif",
-    lightboxWebp: "/assets/images/gallery/photo-10-2560.webp",
-    lightboxJpg: "/assets/images/gallery/photo-10-2560.jpg",
   },
   {
     id: "photo-11",
     alt: "Anttonias en vivo - Era debut",
     credits: "FOTOGRAFÍA: ROD HOFFMANN",
-    gridAvif: "/assets/images/gallery/photo-11-800.avif",
-    gridWebp: "/assets/images/gallery/photo-11-800.webp",
-    gridJpg: "/assets/images/gallery/photo-11-800.jpg",
-    lightboxAvif: "/assets/images/gallery/photo-11-2560.avif",
-    lightboxWebp: "/assets/images/gallery/photo-11-2560.webp",
-    lightboxJpg: "/assets/images/gallery/photo-11-2560.jpg",
   }
 ];
+
+const photos = rawPhotos.map(p => ({
+  ...p,
+  gridJxl: `${VAULT_BASE}/${p.id}-800.jxl`,
+  gridAvif: `${VAULT_BASE}/${p.id}-800.avif`,
+  gridWebp: `${VAULT_BASE}/${p.id}-800.webp`,
+  gridJpg: `${VAULT_BASE}/${p.id}-800.jpg`,
+}));
 ---
 
 <section class="gallery-section" id="galeria" aria-label="Galería fotográfica oficial">
@@ -143,6 +87,7 @@ const photos = [
             aria-label={`Ampliar fotografía: ${p.alt}`}
           >
             <picture>
+              <source srcset={p.gridJxl} type="image/jxl" />
               <source srcset={p.gridAvif} type="image/avif" />
               <source srcset={p.gridWebp} type="image/webp" />
               <img 
@@ -177,6 +122,7 @@ const photos = [
       <div class="lightbox-media-wrap">
         <div class="lightbox-img-frame">
           <picture id="lb-picture">
+            <source id="lb-source-jxl" srcset="" type="image/jxl" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1600px" />
             <source id="lb-source-avif" srcset="" type="image/avif" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1600px" />
             <source id="lb-source-webp" srcset="" type="image/webp" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1600px" />
             <img src="" alt="" id="lb-img" class="lightbox-image" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1600px" />
@@ -549,99 +495,69 @@ const photos = [
 </style>
 
 <script>
+  const VAULT_BASE = 'https://vault-anttonias.rod.cl/gallery';
+
   const photosData = [
     {
       id: "photo-01",
       alt: "Anttonias en el Cementerio General de Recoleta",
-      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-      avif: "/assets/images/gallery/photo-01-2560.avif",
-      webp: "/assets/images/gallery/photo-01-2560.webp",
-      jpg: "/assets/images/gallery/photo-01-2560.jpg"
+      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)"
     },
     {
       id: "photo-02",
       alt: "Antonia Holzapfel en primer plano",
-      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-      avif: "/assets/images/gallery/photo-02-2560.avif",
-      webp: "/assets/images/gallery/photo-02-2560.webp",
-      jpg: "/assets/images/gallery/photo-02-2560.jpg"
+      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)"
     },
     {
       id: "photo-03",
       alt: "Banda entre sepulcros y cruces de hierro",
-      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-      avif: "/assets/images/gallery/photo-03-2560.avif",
-      webp: "/assets/images/gallery/photo-03-2560.webp",
-      jpg: "/assets/images/gallery/photo-03-2560.jpg"
+      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)"
     },
     {
       id: "photo-04",
       alt: "Detalle de lápidas y perspectiva fúnebre",
-      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-      avif: "/assets/images/gallery/photo-04-2560.avif",
-      webp: "/assets/images/gallery/photo-04-2560.webp",
-      jpg: "/assets/images/gallery/photo-04-2560.jpg"
+      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)"
     },
     {
       id: "photo-05",
       alt: "Retrato de banda frente al mausoleo",
-      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-      avif: "/assets/images/gallery/photo-05-2560.avif",
-      webp: "/assets/images/gallery/photo-05-2560.webp",
-      jpg: "/assets/images/gallery/photo-05-2560.jpg"
+      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)"
     },
     {
       id: "photo-06",
       alt: "Guitarras y arquitectura del Cementerio General",
-      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-      avif: "/assets/images/gallery/photo-06-2560.avif",
-      webp: "/assets/images/gallery/photo-06-2560.webp",
-      jpg: "/assets/images/gallery/photo-06-2560.jpg"
+      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)"
     },
     {
       id: "photo-07",
       alt: "Perspectiva diagonal entre tumbas",
-      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-      avif: "/assets/images/gallery/photo-07-2560.avif",
-      webp: "/assets/images/gallery/photo-07-2560.webp",
-      jpg: "/assets/images/gallery/photo-07-2560.jpg"
+      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)"
     },
     {
       id: "photo-08",
       alt: "Atmósfera de niebla y luz de cementerio",
-      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-      avif: "/assets/images/gallery/photo-08-2560.avif",
-      webp: "/assets/images/gallery/photo-08-2560.webp",
-      jpg: "/assets/images/gallery/photo-08-2560.jpg"
+      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)"
     },
     {
       id: "photo-09",
       alt: "Retrato coral de Anttonias en el pasaje de criptas",
-      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-      avif: "/assets/images/gallery/photo-09-2560.avif",
-      webp: "/assets/images/gallery/photo-09-2560.webp",
-      jpg: "/assets/images/gallery/photo-09-2560.jpg"
+      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)"
     },
     {
       id: "photo-10",
       alt: "Composición fúnebre en blanco y negro",
-      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
-      avif: "/assets/images/gallery/photo-10-2560.avif",
-      webp: "/assets/images/gallery/photo-10-2560.webp",
-      jpg: "/assets/images/gallery/photo-10-2560.jpg"
+      credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)"
     },
     {
       id: "photo-11",
       alt: "Anttonias en vivo - Era debut",
-      credits: "FOTOGRAFÍA: ROD HOFFMANN",
-      avif: "/assets/images/gallery/photo-11-2560.avif",
-      webp: "/assets/images/gallery/photo-11-2560.webp",
-      jpg: "/assets/images/gallery/photo-11-2560.jpg"
+      credits: "FOTOGRAFÍA: ROD HOFFMANN"
     }
   ];
 
   const lightbox = document.getElementById('gallery-lightbox') as HTMLDialogElement | null;
   const lbImg = document.getElementById('lb-img') as HTMLImageElement | null;
+  const lbSourceJxl = document.getElementById('lb-source-jxl') as HTMLSourceElement | null;
   const lbSourceAvif = document.getElementById('lb-source-avif') as HTMLSourceElement | null;
   const lbSourceWebp = document.getElementById('lb-source-webp') as HTMLSourceElement | null;
   const lbCredits = document.getElementById('lb-credits');
@@ -654,7 +570,7 @@ const photos = [
   let currentIndex = 0;
 
   function getSrcset(id: string, ext: string) {
-    return `/assets/images/gallery/${id}-800.${ext} 800w, /assets/images/gallery/${id}-1600.${ext} 1600w, /assets/images/gallery/${id}-2560.${ext} 2560w`;
+    return `${VAULT_BASE}/${id}-800.${ext} 800w, ${VAULT_BASE}/${id}-1600.${ext} 1600w, ${VAULT_BASE}/${id}-2560.${ext} 2560w`;
   }
 
   function preloadNeighbor(idx: number) {
@@ -662,7 +578,7 @@ const photos = [
     if (!p) return;
     const size = window.innerWidth <= 768 ? '800' : (window.innerWidth <= 1200 ? '1600' : '2560');
     const img = new Image();
-    img.src = `/assets/images/gallery/${p.id}-${size}.webp`;
+    img.src = `${VAULT_BASE}/${p.id}-${size}.webp`;
   }
 
   function showPhoto(idx: number) {
@@ -671,11 +587,12 @@ const photos = [
     currentIndex = idx;
 
     const p = photosData[currentIndex];
+    if (lbSourceJxl) lbSourceJxl.srcset = getSrcset(p.id, 'jxl');
     if (lbSourceAvif) lbSourceAvif.srcset = getSrcset(p.id, 'avif');
     if (lbSourceWebp) lbSourceWebp.srcset = getSrcset(p.id, 'webp');
     if (lbImg) {
       const fallbackSize = window.innerWidth <= 768 ? '800' : '1600';
-      lbImg.src = `/assets/images/gallery/${p.id}-${fallbackSize}.jpg`;
+      lbImg.src = `${VAULT_BASE}/${p.id}-${fallbackSize}.jpg`;
       lbImg.srcset = getSrcset(p.id, 'jpg');
       lbImg.alt = p.alt;
     }

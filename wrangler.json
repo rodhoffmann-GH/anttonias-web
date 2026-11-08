@@ -5,5 +5,11 @@
   "compatibility_flags": [
     "nodejs_compat"
   ],
-  "pages_build_output_dir": "dist"
+  "pages_build_output_dir": "dist",
+  "r2_buckets": [
+    {
+      "binding": "VAULT",
+      "bucket_name": "anttonias-vault"
+    }
+  ]
 }
