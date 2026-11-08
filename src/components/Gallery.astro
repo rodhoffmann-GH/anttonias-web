@@ -177,9 +177,9 @@ const photos = [
       <div class="lightbox-media-wrap">
         <div class="lightbox-img-frame">
           <picture id="lb-picture">
-            <source id="lb-source-avif" srcset="" type="image/avif" />
-            <source id="lb-source-webp" srcset="" type="image/webp" />
-            <img src="" alt="" id="lb-img" class="lightbox-image" />
+            <source id="lb-source-avif" srcset="" type="image/avif" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1600px" />
+            <source id="lb-source-webp" srcset="" type="image/webp" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1600px" />
+            <img src="" alt="" id="lb-img" class="lightbox-image" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1600px" />
           </picture>
         </div>
         <div class="lightbox-meta">
@@ -653,20 +653,40 @@ const photos = [
 
   let currentIndex = 0;
 
+  function getSrcset(id: string, ext: string) {
+    return `/assets/images/gallery/${id}-800.${ext} 800w, /assets/images/gallery/${id}-1600.${ext} 1600w, /assets/images/gallery/${id}-2560.${ext} 2560w`;
+  }
+
+  function preloadNeighbor(idx: number) {
+    const p = photosData[idx];
+    if (!p) return;
+    const size = window.innerWidth <= 768 ? '800' : (window.innerWidth <= 1200 ? '1600' : '2560');
+    const img = new Image();
+    img.src = `/assets/images/gallery/${p.id}-${size}.webp`;
+  }
+
   function showPhoto(idx: number) {
     if (idx < 0) idx = photosData.length - 1;
     if (idx >= photosData.length) idx = 0;
     currentIndex = idx;
 
     const p = photosData[currentIndex];
-    if (lbSourceAvif) lbSourceAvif.srcset = p.avif;
-    if (lbSourceWebp) lbSourceWebp.srcset = p.webp;
+    if (lbSourceAvif) lbSourceAvif.srcset = getSrcset(p.id, 'avif');
+    if (lbSourceWebp) lbSourceWebp.srcset = getSrcset(p.id, 'webp');
     if (lbImg) {
-      lbImg.src = p.jpg;
+      const fallbackSize = window.innerWidth <= 768 ? '800' : '1600';
+      lbImg.src = `/assets/images/gallery/${p.id}-${fallbackSize}.jpg`;
+      lbImg.srcset = getSrcset(p.id, 'jpg');
       lbImg.alt = p.alt;
     }
     if (lbCredits) lbCredits.textContent = p.credits;
     if (lbCounter) lbCounter.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${String(photosData.length).padStart(2, '0')}`;
+
+    // Preload inmediato de fotos adyacentes para que el swipe sea a 0ms de latencia
+    const nextIdx = (currentIndex + 1) % photosData.length;
+    const prevIdx = (currentIndex - 1 + photosData.length) % photosData.length;
+    preloadNeighbor(nextIdx);
+    preloadNeighbor(prevIdx);
   }
 
   function openLightbox(idx: number) {

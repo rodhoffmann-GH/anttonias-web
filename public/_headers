@@ -1,0 +1,11 @@
+# Cloudflare Pages Edge Caching Headers
+/assets/images/gallery/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+/assets/video/*
+  Cache-Control: public, max-age=31536000, immutable
+  Accept-Ranges: bytes
+
+/assets/vectors/*
+  Cache-Control: public, max-age=31536000, immutable
