@@ -99,8 +99,11 @@ const schemaMusicGroup = {
   <script>
     import Lenis from 'lenis';
 
-    // Singleton Lenis
-    if (!(window as any).__anttoniasLenis) {
+    // Detección estricta de dispositivo táctil / móvil
+    // En móviles y pantallas táctiles, el scroll nativo por hardware (120Hz) jamás debe ser interceptado por Lenis
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 860;
+
+    if (!isTouchDevice && !(window as any).__anttoniasLenis) {
       const lenis = new Lenis({
         lerp: 0.08,
         smoothWheel: true,
@@ -114,7 +117,7 @@ const schemaMusicGroup = {
       }
       requestAnimationFrame(raf);
 
-      // Smooth scroll en enlaces ancla internos
+      // Smooth scroll en enlaces ancla internos desktop
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener('click', (e) => {
           const href = anchor.getAttribute('href');
@@ -123,6 +126,21 @@ const schemaMusicGroup = {
             if (target) {
               e.preventDefault();
               lenis.scrollTo(target as HTMLElement, { offset: -60, duration: 1.2 });
+            }
+          }
+        });
+      });
+    } else {
+      // En dispositivos móviles / touch: scroll nativo 100% fluido por hardware
+      document.documentElement.style.scrollBehavior = 'smooth';
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', (e) => {
+          const href = anchor.getAttribute('href');
+          if (href && href.length > 1) {
+            const target = document.querySelector(href);
+            if (target) {
+              e.preventDefault();
+              target.scrollIntoView({ behavior: 'smooth' });
             }
           }
         });

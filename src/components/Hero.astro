@@ -133,28 +133,36 @@ import Logo from './Logo.astro';
     });
   });
 
-  // Aberración Cromática (RGB Shift) asimétrica, 2D y con desenfoque progresivo al hacer Scroll
+  // Aberración Cromática (RGB Shift) en Desktop con rAF y parada cuando sale del viewport
   const chromaWrap = document.getElementById('hero-chroma-wrap');
-  if (chromaWrap) {
+  if (chromaWrap && window.innerWidth > 768) {
+    let ticking = false;
     const updateAberration = () => {
       const scrollY = window.scrollY;
+      if (scrollY > 500) {
+        ticking = false;
+        return;
+      }
+
       const progress = Math.min(scrollY / 300, 1.2);
-      
-      // Desplazamiento X e Y no simétrico (dispersión diagonal analógica)
-      const scrollX = progress * 32;       // Hasta 32px en X
-      const scrollY_red = progress * 10;   // Rojo se desvía hacia abajo (-10px)
-      const scrollY_cyan = progress * 14;  // Cian se desvía hacia arriba (+14px)
-      
-      // Desenfoque óptico progresivo
-      const blurVal = progress * 5.5;      // Hasta 5.5px de desenfoque al abrirse
+      const scrollX = progress * 32;
+      const scrollY_red = progress * 10;
+      const scrollY_cyan = progress * 14;
+      const blurVal = progress * 5.5;
       
       chromaWrap.style.setProperty('--scroll-x', `${scrollX.toFixed(2)}px`);
       chromaWrap.style.setProperty('--scroll-y-red', `${scrollY_red.toFixed(2)}px`);
       chromaWrap.style.setProperty('--scroll-y-cyan', `${scrollY_cyan.toFixed(2)}px`);
       chromaWrap.style.setProperty('--chroma-blur', `${blurVal.toFixed(2)}px`);
+      ticking = false;
     };
 
-    window.addEventListener('scroll', updateAberration, { passive: true });
+    window.addEventListener('scroll', () => {
+      if (!ticking && window.scrollY < 550) {
+        window.requestAnimationFrame(updateAberration);
+        ticking = true;
+      }
+    }, { passive: true });
     updateAberration();
   }
 </script>

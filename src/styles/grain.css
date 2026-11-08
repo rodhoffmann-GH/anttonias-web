@@ -34,3 +34,10 @@
     rgba(8, 8, 8, 0.55) 100%
   );
 }
+
+@media (max-width: 768px) {
+  .film-grain-overlay {
+    mix-blend-mode: normal;
+    opacity: 0.03;
+  }
+}

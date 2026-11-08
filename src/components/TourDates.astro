@@ -159,8 +159,10 @@ const shows = [
     border-bottom: none;
   }
 
-  .tour-row:hover {
-    background: rgba(255, 255, 255, 0.025);
+  @media (hover: hover) {
+    .tour-row:hover {
+      background: rgba(255, 255, 255, 0.025);
+    }
   }
 
   @media (min-width: 860px) {
@@ -281,6 +283,7 @@ const shows = [
     .tour-row {
       padding: 0.85rem 0.75rem;
       gap: 0.35rem;
+      transition: none;
     }
 
     .date-txt {
