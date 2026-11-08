@@ -109,6 +109,27 @@ import Logo from './Logo.astro';
     defaultVideo.play().catch(() => {});
   }
 
+  // Pausar video cuando el Hero sale de pantalla para liberar 100% de GPU en mobile/desktop
+  const heroSection = document.getElementById('hero');
+  if (heroSection) {
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const currentActive = wrapper?.getAttribute('data-active-media');
+        if (currentActive && currentActive !== 'photo') {
+          const vid = document.getElementById(`video-${currentActive}`) as HTMLVideoElement | null;
+          if (vid) {
+            if (entry.isIntersecting) {
+              vid.play().catch(() => {});
+            } else {
+              vid.pause();
+            }
+          }
+        }
+      });
+    }, { threshold: 0.05 });
+    videoObserver.observe(heroSection);
+  }
+
   toggleButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const target = btn.getAttribute('data-target');

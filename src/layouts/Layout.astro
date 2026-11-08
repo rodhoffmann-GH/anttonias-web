@@ -131,8 +131,7 @@ const schemaMusicGroup = {
         });
       });
     } else {
-      // En dispositivos móviles / touch: scroll nativo 100% fluido por hardware
-      document.documentElement.style.scrollBehavior = 'smooth';
+      // En dispositivos móviles / touch: inercia táctil nativa 100% fluida
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener('click', (e) => {
           const href = anchor.getAttribute('href');

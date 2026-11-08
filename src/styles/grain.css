@@ -37,7 +37,6 @@
 
 @media (max-width: 768px) {
   .film-grain-overlay {
-    mix-blend-mode: normal;
-    opacity: 0.03;
+    display: none;
   }
 }

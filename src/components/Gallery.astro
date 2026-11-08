@@ -447,6 +447,10 @@ const photos = [
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95);
     filter: grayscale(100%) contrast(115%);
     background: #000;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    touch-action: pan-y;
   }
 
   .lightbox-meta {
@@ -687,10 +691,55 @@ const photos = [
   btnPrev?.addEventListener('click', () => showPhoto(currentIndex - 1));
   btnNext?.addEventListener('click', () => showPhoto(currentIndex + 1));
 
+  // Clic/Tap fuera de la foto cierra inmediatamente el lightbox
   lightbox?.addEventListener('click', (e) => {
-    const frame = document.querySelector('.lightbox-media-wrap');
-    if (frame && !frame.contains(e.target as Node) && !(e.target as HTMLElement).closest('.lightbox-btn')) {
-      closeLightbox();
+    const target = e.target as HTMLElement;
+    // Si el toque fue dentro de la imagen o en un botón de control, no cerrar
+    if (target.id === 'lb-img' || target.closest('.lightbox-btn') || target.closest('.lightbox-meta')) {
+      return;
+    }
+    closeLightbox();
+  });
+
+  // Soporte de Gesto Swipe en Móviles (← Siguiente / Anterior →)
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let touchEndY = 0;
+  let isSwiping = false;
+
+  lightbox?.addEventListener('touchstart', (e: TouchEvent) => {
+    if (e.touches.length === 1) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchEndX = touchStartX;
+      touchEndY = touchStartY;
+      isSwiping = true;
+    }
+  }, { passive: true });
+
+  lightbox?.addEventListener('touchmove', (e: TouchEvent) => {
+    if (isSwiping && e.touches.length === 1) {
+      touchEndX = e.touches[0].clientX;
+      touchEndY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  lightbox?.addEventListener('touchend', () => {
+    if (!isSwiping) return;
+    isSwiping = false;
+    const diffX = touchEndX - touchStartX;
+    const diffY = touchEndY - touchStartY;
+    const threshold = 40; // Mínimo de 40px para considerar swipe intencional
+
+    if (Math.abs(diffX) > threshold && Math.abs(diffX) > Math.abs(diffY) * 1.1) {
+      if (diffX < 0) {
+        // Swipe hacia la izquierda: siguiente foto
+        showPhoto(currentIndex + 1);
+      } else {
+        // Swipe hacia la derecha: foto anterior
+        showPhoto(currentIndex - 1);
+      }
     }
   });
 
