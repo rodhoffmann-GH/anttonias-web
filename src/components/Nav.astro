@@ -143,16 +143,21 @@ import Logo from './Logo.astro';
     font-size: 0.82rem;
     font-weight: 500;
     letter-spacing: 0.22em;
-    color: var(--color-text-muted);
-    transition: color var(--duration-fast) ease, letter-spacing var(--duration-fast) ease;
+    color: rgba(240, 237, 230, 0.78);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    transition: color var(--duration-fast) ease, 
+                letter-spacing var(--duration-fast) ease,
+                text-shadow var(--duration-fast) ease;
     position: relative;
     padding: 0.25rem 0;
     text-transform: uppercase;
   }
 
-  .nav-link:hover {
-    color: var(--color-text-primary);
-    letter-spacing: 0.26em;
+  .nav-link:hover,
+  .nav-link.active {
+    color: #ffffff;
+    letter-spacing: 0.25em;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.4), 0 1px 6px rgba(0, 0, 0, 0.8);
   }
 
   .nav-link::after {
@@ -162,11 +167,13 @@ import Logo from './Logo.astro';
     left: 0;
     width: 0%;
     height: 1px;
-    background-color: var(--accent);
+    background-color: #ffffff;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
     transition: width var(--duration-fast) var(--ease-cinematic);
   }
 
-  .nav-link:hover::after {
+  .nav-link:hover::after,
+  .nav-link.active::after {
     width: 100%;
   }
 
@@ -233,6 +240,7 @@ import Logo from './Logo.astro';
   const toggleBtn = document.getElementById('mobile-toggle');
   const menu = document.getElementById('mobile-menu');
   const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+  const desktopLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-link');
 
   if (toggleBtn && menu) {
     toggleBtn.addEventListener('click', () => {
@@ -250,5 +258,52 @@ import Logo from './Logo.astro';
         document.body.style.overflow = '';
       });
     });
+  }
+
+  // Detección de Sección Activa en el Menú Desktop
+  if (desktopLinks.length > 0) {
+    const sectionIds = Array.from(desktopLinks)
+      .map(link => link.getAttribute('href')?.replace('#', ''))
+      .filter((id): id is string => Boolean(id));
+
+    const sections = sectionIds
+      .map(id => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Si estamos cerca de la cima, limpiar activo
+        if (window.scrollY < 200) {
+          desktopLinks.forEach(link => link.classList.remove('active'));
+          return;
+        }
+
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const currentId = entry.target.id;
+            desktopLinks.forEach(link => {
+              const href = link.getAttribute('href')?.replace('#', '');
+              if (href === currentId) {
+                link.classList.add('active');
+              } else {
+                link.classList.remove('active');
+              }
+            });
+          }
+        });
+      },
+      {
+        rootMargin: '-30% 0px -50% 0px',
+        threshold: 0
+      }
+    );
+
+    sections.forEach(sec => observer.observe(sec));
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < 200) {
+        desktopLinks.forEach(link => link.classList.remove('active'));
+      }
+    }, { passive: true });
   }
 </script>
