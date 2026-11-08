@@ -21,6 +21,7 @@ yarn-error.log*
 Thumbs.db
 
 # Diagnostic & Intermediate Scaffolding
+raw-masters/
 public/inspect.html
 public/assets/fonts/
 public/assets/video/samples/

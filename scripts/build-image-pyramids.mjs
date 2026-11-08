@@ -5,16 +5,16 @@ import path from 'node:path';
 const SIZES = [2560, 1600, 800];
 
 const ALL_PHOTOS = [
-  { id: 'photo-01', file: 'public/assets/images/anttonias-cementerio-01.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Anttonias en el Cementerio General de Recoleta' },
+  { id: 'photo-01', file: 'raw-masters/anttonias-cementerio-01.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Anttonias en el Cementerio General de Recoleta' },
   { id: 'photo-02', file: 'public/assets/images/anttonias-cementerio-03.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Antonia Holzapfel en primer plano' },
-  { id: 'photo-03', file: 'public/assets/images/anttonias-cementerio-04.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Banda entre sepulcros y cruces de hierro' },
-  { id: 'photo-04', file: 'public/assets/images/anttonias-cementerio-103.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Detalle de lápidas y perspectiva fúnebre' },
-  { id: 'photo-05', file: 'public/assets/images/dropbox-image00003.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Retrato de banda frente al mausoleo' },
-  { id: 'photo-06', file: 'public/assets/images/dropbox-5.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Guitarras y arquitectura del Cementerio General' },
-  { id: 'photo-07', file: 'public/assets/images/dropbox-image00005.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Perspectiva diagonal entre tumbas' },
-  { id: 'photo-08', file: 'public/assets/images/dropbox-image00006.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Atmósfera de niebla y luz de cementerio' },
-  { id: 'photo-09', file: 'public/assets/images/dropbox-9.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Retrato coral de Anttonias en el pasaje de criptas' },
-  { id: 'photo-10', file: 'public/assets/images/dropbox-12.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Composición fúnebre en blanco y negro' },
+  { id: 'photo-03', file: 'raw-masters/anttonias-cementerio-04.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Banda entre sepulcros y cruces de hierro' },
+  { id: 'photo-04', file: 'raw-masters/anttonias-cementerio-103.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Detalle de lápidas y perspectiva fúnebre' },
+  { id: 'photo-05', file: 'raw-masters/dropbox-image00003.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Retrato de banda frente al mausoleo' },
+  { id: 'photo-06', file: 'raw-masters/dropbox-5.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Guitarras y arquitectura del Cementerio General' },
+  { id: 'photo-07', file: 'raw-masters/dropbox-image00005.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Perspectiva diagonal entre tumbas' },
+  { id: 'photo-08', file: 'raw-masters/dropbox-image00006.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Atmósfera de niebla y luz de cementerio' },
+  { id: 'photo-09', file: 'raw-masters/dropbox-9.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Retrato coral de Anttonias en el pasaje de criptas' },
+  { id: 'photo-10', file: 'raw-masters/dropbox-12.jpg', credits: 'FOTOGRAFÍA: CLAUDIA ARDID (2026)', alt: 'Composición fúnebre en blanco y negro' },
   { id: 'photo-11', file: 'public/assets/images/anttonias-debut-rod-659.jpg', credits: 'FOTOGRAFÍA: ROD HOFFMANN', alt: 'Anttonias en vivo - Era debut' }
 ];
 
