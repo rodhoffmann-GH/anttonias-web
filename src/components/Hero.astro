@@ -89,14 +89,25 @@ import Logo from './Logo.astro';
     video?.play().catch(() => {});
   });
 
-  // Aberración Cromática (RGB Shift) viva en reposo y multiplicada al hacer Scroll
+  // Aberración Cromática (RGB Shift) asimétrica, 2D y con desenfoque progresivo al hacer Scroll
   const chromaWrap = document.getElementById('hero-chroma-wrap');
   if (chromaWrap) {
     const updateAberration = () => {
       const scrollY = window.scrollY;
-      // Al hacer scroll, la separación aumenta progresivamente de 0 a 35px
-      const scrollShift = Math.min((scrollY / 280) * 32, 36);
-      chromaWrap.style.setProperty('--chroma-scroll', `${scrollShift.toFixed(2)}px`);
+      const progress = Math.min(scrollY / 300, 1.2);
+      
+      // Desplazamiento X e Y no simétrico (dispersión diagonal analógica)
+      const scrollX = progress * 32;       // Hasta 32px en X
+      const scrollY_red = progress * 10;   // Rojo se desvía hacia abajo (-10px)
+      const scrollY_cyan = progress * 14;  // Cian se desvía hacia arriba (+14px)
+      
+      // Desenfoque óptico progresivo
+      const blurVal = progress * 5.5;      // Hasta 5.5px de desenfoque al abrirse
+      
+      chromaWrap.style.setProperty('--scroll-x', `${scrollX.toFixed(2)}px`);
+      chromaWrap.style.setProperty('--scroll-y-red', `${scrollY_red.toFixed(2)}px`);
+      chromaWrap.style.setProperty('--scroll-y-cyan', `${scrollY_cyan.toFixed(2)}px`);
+      chromaWrap.style.setProperty('--chroma-blur', `${blurVal.toFixed(2)}px`);
     };
 
     window.addEventListener('scroll', updateAberration, { passive: true });
@@ -210,8 +221,11 @@ import Logo from './Logo.astro';
     width: clamp(340px, 80vw, 980px);
     height: auto;
     max-height: 280px;
-    --chroma-base: 4.5px;
-    --chroma-scroll: 0px;
+    --chroma-base: 2px;
+    --scroll-x: 0px;
+    --scroll-y-red: 0px;
+    --scroll-y-cyan: 0px;
+    --chroma-blur: 0px;
   }
 
   .logo-chroma-wrap :global(.chroma-layer) {
@@ -219,7 +233,7 @@ import Logo from './Logo.astro';
     width: 100%;
     height: auto;
     max-height: 280px;
-    will-change: transform;
+    will-change: transform, filter;
   }
 
   /* Canal Blanco Frontal Principal */
@@ -235,74 +249,125 @@ import Logo from './Logo.astro';
     transform: scale(1.02);
   }
 
-  /* Canal Rojo (Desplazado a la izquierda) */
+  /* Canal Rojo (Asimétrico: izquierda y levemente arriba, vibración arrítmica rápida) */
   .logo-chroma-wrap :global(.chroma-red) {
     z-index: 1;
-    color: #ff1a40;
+    color: #ff1438;
     opacity: 0.88;
     mix-blend-mode: screen;
-    transform: translate(calc((var(--chroma-base) + var(--chroma-scroll)) * -1), 0);
-    animation: jitterRed 3.2s infinite ease-in-out;
+    filter: blur(var(--chroma-blur));
+    transform: translate(
+      calc((var(--chroma-base) + var(--scroll-x)) * -1),
+      calc(var(--scroll-y-red) * -1)
+    );
+    animation: twitchRed 0.68s steps(2, jump-none) infinite;
     pointer-events: none;
   }
 
-  /* Canal Azul/Cian (Desplazado a la derecha) */
+  /* Canal Azul/Cian (Asimétrico: derecha y abajo, frecuencia y desfase independiente) */
   .logo-chroma-wrap :global(.chroma-cyan) {
     z-index: 2;
-    color: #00e5ff;
+    color: #00e8ff;
     opacity: 0.88;
     mix-blend-mode: screen;
-    transform: translate(calc(var(--chroma-base) + var(--chroma-scroll)), 0);
-    animation: jitterCyan 3.2s infinite ease-in-out;
+    filter: blur(var(--chroma-blur));
+    transform: translate(
+      calc(var(--chroma-base) * 1.15 + var(--scroll-x) * 1.08),
+      var(--scroll-y-cyan)
+    );
+    animation: twitchCyan 0.94s steps(2, jump-none) infinite;
     pointer-events: none;
   }
 
-  /* Micro-vibración analógica continua en reposo */
-  @keyframes jitterRed {
+  /* Vibración arrítmica y rápida para el canal Rojo (ciclo de 0.68s) */
+  @keyframes twitchRed {
     0%, 100% {
-      transform: translate(calc((var(--chroma-base) + var(--chroma-scroll)) * -1), 0);
+      transform: translate(
+        calc((var(--chroma-base) + var(--scroll-x)) * -1),
+        calc(var(--scroll-y-red) * -1)
+      );
     }
-    14% {
-      transform: translate(calc((var(--chroma-base) + var(--chroma-scroll) + 1.4px) * -1), -0.6px);
+    12% {
+      transform: translate(
+        calc((var(--chroma-base) + var(--scroll-x) + 1.2px) * -1),
+        calc((var(--scroll-y-red) + 0.5px) * -1)
+      );
     }
-    28% {
-      transform: translate(calc((var(--chroma-base) + var(--chroma-scroll) - 0.8px) * -1), 0.4px);
+    27% {
+      transform: translate(
+        calc((var(--chroma-base) + var(--scroll-x) - 0.6px) * -1),
+        calc((var(--scroll-y-red) - 0.4px) * -1)
+      );
     }
-    42% {
-      transform: translate(calc((var(--chroma-base) + var(--chroma-scroll) + 2px) * -1), -0.2px);
+    43% {
+      transform: translate(
+        calc((var(--chroma-base) + var(--scroll-x) + 1.6px) * -1),
+        calc((var(--scroll-y-red) + 0.3px) * -1)
+      );
     }
-    56% {
-      transform: translate(calc((var(--chroma-base) + var(--chroma-scroll)) * -1), 0);
+    58% {
+      transform: translate(
+        calc((var(--chroma-base) + var(--scroll-x)) * -1),
+        calc(var(--scroll-y-red) * -1)
+      );
     }
-    70% {
-      transform: translate(calc((var(--chroma-base) + var(--chroma-scroll) + 0.9px) * -1), 0.6px);
+    74% {
+      transform: translate(
+        calc((var(--chroma-base) + var(--scroll-x) + 0.8px) * -1),
+        calc((var(--scroll-y-red) - 0.6px) * -1)
+      );
     }
-    85% {
-      transform: translate(calc((var(--chroma-base) + var(--chroma-scroll) - 1.2px) * -1), -0.3px);
+    89% {
+      transform: translate(
+        calc((var(--chroma-base) + var(--scroll-x) - 1.1px) * -1),
+        calc((var(--scroll-y-red) + 0.4px) * -1)
+      );
     }
   }
 
-  @keyframes jitterCyan {
+  /* Vibración arrítmica desincronizada para el canal Cian (ciclo de 0.94s) */
+  @keyframes twitchCyan {
     0%, 100% {
-      transform: translate(calc(var(--chroma-base) + var(--chroma-scroll)), 0);
+      transform: translate(
+        calc(var(--chroma-base) * 1.15 + var(--scroll-x) * 1.08),
+        var(--scroll-y-cyan)
+      );
     }
-    14% {
-      transform: translate(calc(var(--chroma-base) + var(--chroma-scroll) + 1.4px), 0.6px);
+    15% {
+      transform: translate(
+        calc(var(--chroma-base) * 1.15 + var(--scroll-x) * 1.08 + 0.9px),
+        calc(var(--scroll-y-cyan) - 0.7px)
+      );
     }
-    28% {
-      transform: translate(calc(var(--chroma-base) + var(--chroma-scroll) - 0.7px), -0.4px);
+    32% {
+      transform: translate(
+        calc(var(--chroma-base) * 1.15 + var(--scroll-x) * 1.08 - 1px),
+        calc(var(--scroll-y-cyan) + 0.5px)
+      );
     }
-    42% {
-      transform: translate(calc(var(--chroma-base) + var(--chroma-scroll) + 1.8px), 0.3px);
+    49% {
+      transform: translate(
+        calc(var(--chroma-base) * 1.15 + var(--scroll-x) * 1.08 + 1.4px),
+        calc(var(--scroll-y-cyan) + 0.8px)
+      );
     }
-    56% {
-      transform: translate(calc(var(--chroma-base) + var(--chroma-scroll)), 0);
+    66% {
+      transform: translate(
+        calc(var(--chroma-base) * 1.15 + var(--scroll-x) * 1.08),
+        var(--scroll-y-cyan)
+      );
     }
-    70% {
-      transform: translate(calc(var(--chroma-base) + var(--chroma-scroll) + 1px), -0.5px);
+    81% {
+      transform: translate(
+        calc(var(--chroma-base) * 1.15 + var(--scroll-x) * 1.08 - 0.7px),
+        calc(var(--scroll-y-cyan) - 0.4px)
+      );
     }
-    85% {
-      transform: translate(calc(var(--chroma-base) + var(--chroma-scroll) - 1.3px), 0.3px);
+    93% {
+      transform: translate(
+        calc(var(--chroma-base) * 1.15 + var(--scroll-x) * 1.08 + 1.1px),
+        calc(var(--scroll-y-cyan) + 0.6px)
+      );
     }
   }
 
