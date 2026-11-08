@@ -33,7 +33,14 @@ import Logo from './Logo.astro';
 
   <div class="hero-content">
     <h1 class="hero-title">
-      <Logo class="hero-logo-svg" id="hero-logo" />
+      <div class="logo-chroma-wrap" id="hero-chroma-wrap">
+        <!-- Capa Roja (Aberración analógica izquierda) -->
+        <Logo class="chroma-layer chroma-red" aria-hidden="true" />
+        <!-- Capa Cian (Aberración analógica derecha) -->
+        <Logo class="chroma-layer chroma-cyan" aria-hidden="true" />
+        <!-- Capa Blanca Frontal Principal -->
+        <Logo class="chroma-layer chroma-main" id="hero-logo" />
+      </div>
       <span class="sr-only">ANTTONIAS</span>
     </h1>
 
@@ -44,22 +51,19 @@ import Logo from './Logo.astro';
 
   <div class="hero-footer-bar">
     <div class="meta-item">
-      <!-- Media Switch Temporal (Foto vs Video) -->
+      <!-- Media Switch Temporal (Foto vs Video) para evaluar con Criss -->
       <div class="media-toggle" role="group" aria-label="Cambiar fondo">
         <button type="button" class="toggle-btn active" id="btn-foto" data-target="photo">FOTO</button>
         <span class="toggle-sep">/</span>
         <button type="button" class="toggle-btn" id="btn-video" data-target="video">VIDEO</button>
       </div>
     </div>
-    <div class="meta-item center">
+    
+    <div class="meta-item right">
       <a href="#disco" class="scroll-cue" aria-label="Bajar a la siguiente sección">
         <span class="cue-label">DESCENDER</span>
         <span class="cue-arrow" aria-hidden="true">↓</span>
       </a>
-    </div>
-    <div class="meta-item right">
-      <span class="meta-label">PRODUCCIÓN</span>
-      <span class="meta-val">ESTUDIOS DEL SUR // 2026</span>
     </div>
   </div>
 </section>
@@ -85,14 +89,14 @@ import Logo from './Logo.astro';
     video?.play().catch(() => {});
   });
 
-  // Aberración Cromática reactiva al Scroll
-  const logo = document.getElementById('hero-logo');
-  if (logo) {
+  // Aberración Cromática (RGB Shift) viva en reposo y multiplicada al hacer Scroll
+  const chromaWrap = document.getElementById('hero-chroma-wrap');
+  if (chromaWrap) {
     const updateAberration = () => {
       const scrollY = window.scrollY;
-      // En reposo: 1.5px. Al hacer scroll aumenta gradualmente hasta 12px
-      const shift = Math.min(1.5 + (scrollY / 320) * 10.5, 12);
-      logo.style.setProperty('--rgb-shift', `${shift.toFixed(2)}px`);
+      // Al hacer scroll, la separación aumenta progresivamente de 0 a 35px
+      const scrollShift = Math.min((scrollY / 280) * 32, 36);
+      chromaWrap.style.setProperty('--chroma-scroll', `${scrollShift.toFixed(2)}px`);
     };
 
     window.addEventListener('scroll', updateAberration, { passive: true });
@@ -198,23 +202,108 @@ import Logo from './Logo.astro';
     width: 100%;
   }
 
-  /* Logotipo con Aberración Cromática (RGB Shift) dinámico */
-  .hero-logo-svg {
+  /* Contenedor multicapa de aberración cromática RGB (Grid 1 / 1 superpuesto) */
+  .logo-chroma-wrap {
+    position: relative;
+    display: grid;
+    place-items: center;
     width: clamp(340px, 80vw, 980px);
     height: auto;
     max-height: 280px;
-    color: var(--color-text-primary);
-    --rgb-shift: 1.5px;
-    filter: 
-      drop-shadow(calc(var(--rgb-shift) * -1) 0 0 rgba(230, 45, 60, 0.75))
-      drop-shadow(calc(var(--rgb-shift) * 1) 0 0 rgba(60, 160, 240, 0.75))
-      drop-shadow(0 14px 35px rgba(0, 0, 0, 0.95));
-    transition: transform var(--duration-normal) var(--ease-cinematic);
-    will-change: filter;
+    --chroma-base: 4.5px;
+    --chroma-scroll: 0px;
   }
 
-  .hero-logo-svg:hover {
+  .logo-chroma-wrap :global(.chroma-layer) {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: auto;
+    max-height: 280px;
+    will-change: transform;
+  }
+
+  /* Canal Blanco Frontal Principal */
+  .logo-chroma-wrap :global(.chroma-main) {
+    position: relative;
+    z-index: 3;
+    color: var(--color-text-primary);
+    filter: drop-shadow(0 14px 40px rgba(0, 0, 0, 0.95));
+    transition: transform var(--duration-normal) var(--ease-cinematic);
+  }
+
+  .logo-chroma-wrap :global(.chroma-main:hover) {
     transform: scale(1.02);
+  }
+
+  /* Canal Rojo (Desplazado a la izquierda) */
+  .logo-chroma-wrap :global(.chroma-red) {
+    z-index: 1;
+    color: #ff1a40;
+    opacity: 0.88;
+    mix-blend-mode: screen;
+    transform: translate(calc((var(--chroma-base) + var(--chroma-scroll)) * -1), 0);
+    animation: jitterRed 3.2s infinite ease-in-out;
+    pointer-events: none;
+  }
+
+  /* Canal Azul/Cian (Desplazado a la derecha) */
+  .logo-chroma-wrap :global(.chroma-cyan) {
+    z-index: 2;
+    color: #00e5ff;
+    opacity: 0.88;
+    mix-blend-mode: screen;
+    transform: translate(calc(var(--chroma-base) + var(--chroma-scroll)), 0);
+    animation: jitterCyan 3.2s infinite ease-in-out;
+    pointer-events: none;
+  }
+
+  /* Micro-vibración analógica continua en reposo */
+  @keyframes jitterRed {
+    0%, 100% {
+      transform: translate(calc((var(--chroma-base) + var(--chroma-scroll)) * -1), 0);
+    }
+    14% {
+      transform: translate(calc((var(--chroma-base) + var(--chroma-scroll) + 1.4px) * -1), -0.6px);
+    }
+    28% {
+      transform: translate(calc((var(--chroma-base) + var(--chroma-scroll) - 0.8px) * -1), 0.4px);
+    }
+    42% {
+      transform: translate(calc((var(--chroma-base) + var(--chroma-scroll) + 2px) * -1), -0.2px);
+    }
+    56% {
+      transform: translate(calc((var(--chroma-base) + var(--chroma-scroll)) * -1), 0);
+    }
+    70% {
+      transform: translate(calc((var(--chroma-base) + var(--chroma-scroll) + 0.9px) * -1), 0.6px);
+    }
+    85% {
+      transform: translate(calc((var(--chroma-base) + var(--chroma-scroll) - 1.2px) * -1), -0.3px);
+    }
+  }
+
+  @keyframes jitterCyan {
+    0%, 100% {
+      transform: translate(calc(var(--chroma-base) + var(--chroma-scroll)), 0);
+    }
+    14% {
+      transform: translate(calc(var(--chroma-base) + var(--chroma-scroll) + 1.4px), 0.6px);
+    }
+    28% {
+      transform: translate(calc(var(--chroma-base) + var(--chroma-scroll) - 0.7px), -0.4px);
+    }
+    42% {
+      transform: translate(calc(var(--chroma-base) + var(--chroma-scroll) + 1.8px), 0.3px);
+    }
+    56% {
+      transform: translate(calc(var(--chroma-base) + var(--chroma-scroll)), 0);
+    }
+    70% {
+      transform: translate(calc(var(--chroma-base) + var(--chroma-scroll) + 1px), -0.5px);
+    }
+    85% {
+      transform: translate(calc(var(--chroma-base) + var(--chroma-scroll) - 1.3px), 0.3px);
+    }
   }
 
   .sr-only {
@@ -303,22 +392,8 @@ import Logo from './Logo.astro';
     gap: 0.75rem;
   }
 
-  .meta-item.center {
-    justify-content: center;
-  }
-
   .meta-item.right {
     justify-content: flex-end;
-  }
-
-  .meta-label {
-    color: var(--color-text-muted);
-    opacity: 0.6;
-  }
-
-  .meta-val {
-    color: var(--color-text-primary);
-    letter-spacing: 0.18em;
   }
 
   .scroll-cue {
@@ -346,13 +421,7 @@ import Logo from './Logo.astro';
 
   @media (max-width: 768px) {
     .hero-footer-bar {
-      flex-direction: column;
       gap: 1rem;
-      text-align: center;
-    }
-
-    .meta-item.right {
-      display: none;
     }
   }
 </style>
