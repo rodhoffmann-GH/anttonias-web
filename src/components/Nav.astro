@@ -11,17 +11,12 @@ import Logo from './Logo.astro';
     </a>
 
     <nav class="nav-links" aria-label="Navegación principal">
-      <a href="#disco" class="nav-link">DISCO</a>
-      <a href="#gira" class="nav-link">GIRA</a>
+      <a href="#disco" class="nav-link">QTRSLM</a>
+      <a href="#gira" class="nav-link">FECHAS</a>
       <a href="#videos" class="nav-link">VIDEOS</a>
       <a href="#catalogo" class="nav-link">CATÁLOGO</a>
       <a href="#prensa" class="nav-link">PRENSA</a>
     </nav>
-
-    <div class="nav-status">
-      <span class="status-pulse" aria-hidden="true"></span>
-      <span class="status-label">NUEVO DISCO DISPONIBLE</span>
-    </div>
 
     <!-- Toggle Móvil Accesible -->
     <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú de navegación">
@@ -33,8 +28,8 @@ import Logo from './Logo.astro';
   <!-- Drawer Móvil -->
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <nav class="mobile-nav-links">
-      <a href="#disco" class="mobile-nav-link">DISCO</a>
-      <a href="#gira" class="mobile-nav-link">GIRA</a>
+      <a href="#disco" class="mobile-nav-link">QTRSLM</a>
+      <a href="#gira" class="mobile-nav-link">FECHAS</a>
       <a href="#videos" class="mobile-nav-link">VIDEOS</a>
       <a href="#catalogo" class="mobile-nav-link">CATÁLOGO</a>
       <a href="#prensa" class="mobile-nav-link">PRENSA / EPK</a>
@@ -140,39 +135,6 @@ import Logo from './Logo.astro';
 
   .nav-link:hover::after {
     width: 100%;
-  }
-
-  .nav-status {
-    display: none;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    color: var(--color-text-muted);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 0.35rem 0.75rem;
-    background: rgba(255, 255, 255, 0.02);
-  }
-
-  @media (min-width: 1024px) {
-    .nav-status {
-      display: flex;
-    }
-  }
-
-  .status-pulse {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: var(--accent);
-    box-shadow: 0 0 8px var(--accent);
-    animation: pulse 2.5s infinite ease-in-out;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 0.4; transform: scale(0.9); }
-    50% { opacity: 1; transform: scale(1.3); }
   }
 
   .mobile-toggle {
