@@ -11,9 +11,20 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Cross-Origin-Opener-Policy: same-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://vault-anttonias.rod.cl https://vault.anttonias.rod.cl; font-src 'self' https://fonts.gstatic.com; media-src 'self' https://vault-anttonias.rod.cl; connect-src 'self' https://vault-anttonias.rod.cl https://vault.anttonias.rod.cl https://cloudflareinsights.com; frame-src 'none'; base-uri 'self';
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://vault-anttonias.rod.cl https://vault.anttonias.rod.cl; font-src 'self'; media-src 'self' https://vault-anttonias.rod.cl; connect-src 'self' https://vault-anttonias.rod.cl https://vault.anttonias.rod.cl https://cloudflareinsights.com; frame-src 'none'; base-uri 'self';
 
-# 2. Rutas Dinámicas de Bóveda & Negociación de Contenido
+# 2. Autodescubrimiento AEO / LLM Knowledge Graph
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=0, must-revalidate
+
+# 3. Tipografías Autohospedadas (Pilar 17 Vanguard)
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# 4. Rutas Dinámicas de Bóveda & Negociación de Contenido
 /vault/gallery/*
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *

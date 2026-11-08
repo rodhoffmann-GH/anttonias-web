@@ -83,10 +83,11 @@ const schemaMusicGroup = {
   <link rel="preconnect" href="https://vault.anttonias.rod.cl" crossorigin />
   <link rel="dns-prefetch" href="https://vault.anttonias.rod.cl" />
 
-  <!-- Tipografías de Sistema & Fallback de Alta Fidelidad -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;600&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet" />
+  <!-- Tipografías Oficiales Autohospedadas (Pilar 17 Vanguard: Zero External Fonts) -->
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+
+  <!-- Autodescubrimiento AEO & LLM Knowledge Graph -->
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Knowledge Graph" />
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json" set:html={JSON.stringify(schemaMusicGroup)} />

@@ -98,6 +98,21 @@
   }
 }
 
+/* --------------------------------------------------------------------------
+   7. WIDE COLOR GAMUT (Display-P3 Deep Black para pantallas OLED / Retina XDR)
+   -------------------------------------------------------------------------- */
+@media (color-gamut: p3) {
+  :root {
+    --color-black: color(display-p3 0.02 0.02 0.02);
+    --color-surface: color(display-p3 0.05 0.05 0.05);
+    --color-surface-elevated: color(display-p3 0.08 0.08 0.08);
+    --color-border: color(display-p3 0.14 0.14 0.14);
+    --color-text-primary: color(display-p3 0.95 0.94 0.92);
+    --accent: color(display-p3 0.23 0.41 0.58);
+    --accent-hover: color(display-p3 0.32 0.52 0.72);
+  }
+}
+
 /* Selector para conmutar a acento Sangre Seca */
 [data-accent="blood"] {
   --accent: var(--accent-blood);
