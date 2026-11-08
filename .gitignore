@@ -19,3 +19,22 @@ yarn-error.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Diagnostic & Intermediate Scaffolding
+public/inspect.html
+public/assets/fonts/
+public/assets/video/samples/
+public/assets/video/raw-*
+public/assets/images/*slice*
+public/assets/images/*matcher*
+public/assets/images/*tight*
+public/assets/images/*wide*
+public/assets/images/*crop*
+public/assets/images/*thresh*
+public/assets/images/*focused*
+public/assets/images/*isolated*
+public/assets/images/*visual*
+public/assets/images/banner-desktop-safe.jpg
+public/assets/vectors/anttonias-script-traced.svg
+public/assets/vectors/banner-traced.svg
+scripts/stream-urls.json
