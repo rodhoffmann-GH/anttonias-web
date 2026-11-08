@@ -2,28 +2,24 @@
 // src/components/AlbumFeature.astro
 
 const tracks = [
-  { num: "01", title: "Verlos morir", duration: "3:42", act: "Acto I: La Culpa y el Dolor" },
-  { num: "02", title: "El dolor", duration: "4:15", act: "Acto I: La Culpa y el Dolor" },
-  { num: "03", title: "Por los siglos de los siglos", duration: "3:58", act: "Acto II: La Permanencia" },
-  { num: "04", title: "Honestidad", duration: "3:30", act: "Acto II: La Permanencia" },
-  { num: "05", title: "Última palabra", duration: "4:02", act: "Acto III: La Desesperanza" },
-  { num: "06", title: "Espíritu", duration: "4:28", act: "Acto III: La Desesperanza" },
-  { num: "07", title: "Te obsesionas con sentir", duration: "3:51", act: "Acto IV: La Contradicción" },
-  { num: "08", title: "Un ángel disparó", duration: "4:12", act: "Acto IV: La Contradicción" },
-  { num: "09", title: "Azul", duration: "5:04", act: "Acto IV: La Contradicción" },
-  { num: "10", title: "Almas contra el tiempo", duration: "4:36", act: "Acto V: El Desenlace" },
-  { num: "11", title: "¿Qué tan romántica será la muerte?", duration: "6:18", act: "Acto V: El Desenlace" }
+  { num: "01", title: "Verlos morir", duration: "3:42" },
+  { num: "02", title: "El dolor", duration: "4:15" },
+  { num: "03", title: "Por los siglos de los siglos", duration: "3:58" },
+  { num: "04", title: "Honestidad", duration: "3:30" },
+  { num: "05", title: "Última palabra", duration: "4:02" },
+  { num: "06", title: "Espíritu", duration: "4:28" },
+  { num: "07", title: "Te obsesionas con sentir", duration: "3:51" },
+  { num: "08", title: "Un ángel disparó", duration: "4:12" },
+  { num: "09", title: "Azul", duration: "5:04" },
+  { num: "10", title: "Almas contra el tiempo", duration: "4:36" },
+  { num: "11", title: "¿Qué tan romántica será la muerte?", duration: "6:18" }
 ];
 ---
 
 <section class="album-section" id="disco" aria-label="El nuevo álbum: ¿Qué tan romántica será la muerte?">
   <div class="album-container">
     <div class="section-header">
-      <span class="section-tag">// SEGUNDO ÁLBUM DE ESTUDIO</span>
       <h2 class="section-title">¿QUÉ TAN ROMÁNTICA SERÁ LA MUERTE?</h2>
-      <p class="section-lead">
-        Una obra conceptual de cinco actos grabada en Estudios del Sur. Un tránsito por el duelo, el resentimiento, la contradicción amorosa y la reconciliación con la propia finitud bajo el pulso del post-punk y el dark rock de guitarras.
-      </p>
     </div>
 
     <div class="album-grid">
@@ -81,48 +77,16 @@ const tracks = [
         </div>
       </div>
 
-      <!-- Columna Derecha: Arquitectura de los 5 Actos & Tracklist -->
+      <!-- Columna Derecha: Tracklist Oficial -->
       <div class="album-narrative">
-        <div class="acts-synopsis">
-          <h3 class="acts-heading">ESTRUCTURA DE LOS CINCO ACTOS</h3>
-          <div class="acts-list">
-            <div class="act-card">
-              <span class="act-num">ACTO I</span>
-              <h4 class="act-title">LA CULPA Y EL DOLOR</h4>
-              <p class="act-desc">La confrontación inicial con el resentimiento y la ira visceral.</p>
-            </div>
-            <div class="act-card">
-              <span class="act-num">ACTO II</span>
-              <h4 class="act-title">LA PERMANENCIA</h4>
-              <p class="act-desc">El peso del tiempo transcurrido y la demanda de honestidad cruda.</p>
-            </div>
-            <div class="act-card">
-              <span class="act-num">ACTO III</span>
-              <h4 class="act-title">LA DESESPERANZA</h4>
-              <p class="act-desc">La invocación espiritual ante la ausencia de respuestas terrenales.</p>
-            </div>
-            <div class="act-card">
-              <span class="act-num">ACTO IV</span>
-              <h4 class="act-title">LA CONTRADICCIÓN</h4>
-              <p class="act-desc">La obsesión por sentir y el frío azul del recuerdo no resuelto.</p>
-            </div>
-            <div class="act-card">
-              <span class="act-num">ACTO V</span>
-              <h4 class="act-title">EL DESENLACE</h4>
-              <p class="act-desc">La serenidad fúnebre: la reconciliación estética con el fin de todo.</p>
-            </div>
-          </div>
-        </div>
-
         <div class="tracklist-wrapper">
-          <h3 class="tracklist-heading">TRACKLIST // 11 CORTES</h3>
+          <h3 class="tracklist-heading">TRACKLIST</h3>
           <ol class="tracklist">
             {tracks.map(t => (
               <li class="track-item">
                 <span class="track-num">{t.num}</span>
                 <div class="track-info">
                   <span class="track-title">{t.title}</span>
-                  <span class="track-act">{t.act}</span>
                 </div>
                 <span class="track-dur">{t.duration}</span>
               </li>
@@ -151,34 +115,17 @@ const tracks = [
   }
 
   .section-header {
-    max-width: 860px;
+    max-width: 960px;
     margin-bottom: var(--space-lg);
-  }
-
-  .section-tag {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.25em;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 0.75rem;
   }
 
   .section-title {
     font-family: var(--font-display);
     font-size: var(--font-size-title);
-    font-weight: 800;
+    font-weight: 400;
     line-height: 1.1;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     color: var(--color-text-primary);
-    margin-bottom: 1rem;
-  }
-
-  .section-lead {
-    font-size: var(--font-size-body);
-    color: var(--color-text-muted);
-    line-height: 1.7;
-    max-width: 720px;
   }
 
   .album-grid {
@@ -296,7 +243,6 @@ const tracks = [
     gap: 3rem;
   }
 
-  .acts-heading,
   .tracklist-heading {
     font-family: var(--font-mono);
     font-size: 0.78rem;
@@ -305,54 +251,6 @@ const tracks = [
     margin-bottom: 1.25rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--color-border);
-  }
-
-  .acts-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-  }
-
-  @media (min-width: 640px) {
-    .acts-list {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-  }
-
-  .act-card {
-    padding: 1.25rem;
-    background: rgba(255, 255, 255, 0.015);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    transition: border-color var(--duration-fast) ease,
-                background-color var(--duration-fast) ease;
-  }
-
-  .act-card:hover {
-    border-color: var(--accent);
-    background: rgba(255, 255, 255, 0.03);
-  }
-
-  .act-num {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 0.25rem;
-  }
-
-  .act-title {
-    font-family: var(--font-display);
-    font-size: 0.95rem;
-    letter-spacing: 0.1em;
-    color: var(--color-text-primary);
-    margin-bottom: 0.4rem;
-  }
-
-  .act-desc {
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
-    line-height: 1.5;
   }
 
   .tracklist {

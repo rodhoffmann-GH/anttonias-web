@@ -4,31 +4,28 @@
 const releases = [
   {
     title: "¿Qué tan romántica será la muerte?",
-    type: "ÁLBUM LP // 11 CANCIONES",
+    type: "ÁLBUM LP · 11 CANCIONES",
     year: "NOVIEMBRE 2026",
     label: "LOTUS RECORDS",
     image: "/assets/images/album-cover-romantica-muerte-3000.jpg",
-    desc: "Segundo álbum conceptual de estudio en cinco actos. Grabado en Estudios del Sur.",
     highlight: "LANZAMIENTO VIGENTE",
     spotify: "https://open.spotify.com/artist/anttonias"
   },
   {
     title: "Anttonias",
-    type: "ÁLBUM DEBUT LP // 7 CANCIONES",
+    type: "ÁLBUM DEBUT LP · 7 CANCIONES",
     year: "AGOSTO 2025",
     label: "INDEPENDIENTE",
     image: "/assets/images/album-cover-debut-3000.jpg",
-    desc: "Álbum homónimo debut. Incluye sencillos como 'Atado a tu sentimiento', 'Dulces corazones' y 'Almendra'. Fotografía por Rod Hoffmann.",
     highlight: "DEBUT HISTÓRICO",
     spotify: "https://open.spotify.com/artist/anttonias"
   },
   {
     title: "Atado a tu sentimiento",
-    type: "SENCILLO // MASTER",
+    type: "SENCILLO",
     year: "2024",
     label: "INDEPENDIENTE",
     image: "/assets/images/single-atado-sentimiento-3000.jpg",
-    desc: "Primer gran himno subterráneo que definió las coordenadas sónicas de la banda.",
     highlight: "PRIMER HIMNO",
     spotify: "https://open.spotify.com/artist/anttonias"
   }
@@ -38,11 +35,7 @@ const releases = [
 <section class="discography-section" id="catalogo" aria-label="Catálogo discográfico completo">
   <div class="disco-container">
     <div class="disco-header">
-      <span class="section-tag">// ARCHIVO HISTÓRICO // OBRAS COMPLETAS</span>
       <h2 class="section-title">DISCOGRAFÍA</h2>
-      <p class="disco-lead">
-        El cuerpo de obra completo de Anttonias: desde sus orígenes independientes en el sector poniente de Santiago hasta el universo fúnebre de su última producción con Lotus Records.
-      </p>
     </div>
 
     <div class="releases-grid">
@@ -66,7 +59,6 @@ const releases = [
 
             <h3 class="release-title">{r.title}</h3>
             <span class="release-type">{r.type}</span>
-            <p class="release-desc">{r.desc}</p>
 
             <div class="release-footer">
               <a href={r.spotify} target="_blank" rel="noopener noreferrer" class="link-listen">
@@ -97,33 +89,17 @@ const releases = [
   }
 
   .disco-header {
-    max-width: 780px;
+    max-width: 960px;
     margin-bottom: var(--space-lg);
-  }
-
-  .section-tag {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.25em;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 0.5rem;
   }
 
   .section-title {
     font-family: var(--font-display);
     font-size: var(--font-size-title);
-    font-weight: 800;
+    font-weight: 400;
     line-height: 1.1;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     color: var(--color-text-primary);
-    margin-bottom: 1rem;
-  }
-
-  .disco-lead {
-    font-size: var(--font-size-body);
-    color: var(--color-text-muted);
-    line-height: 1.7;
   }
 
   .releases-grid {
@@ -223,14 +199,7 @@ const releases = [
     font-size: 0.72rem;
     letter-spacing: 0.12em;
     color: var(--color-text-muted);
-  }
-
-  .release-desc {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    line-height: 1.55;
-    margin-top: 0.5rem;
-    flex: 1;
+    margin-bottom: 1.5rem;
   }
 
   .release-footer {

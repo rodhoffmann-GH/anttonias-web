@@ -51,7 +51,7 @@
 
   /* Escala Fluida (clamp) */
   --font-size-hero: clamp(2.75rem, 8vw + 1rem, 7.5rem);
-  --font-size-title: clamp(1.85rem, 3.5vw + 0.5rem, 3.75rem);
+  --font-size-title: clamp(2.2rem, 4.5vw + 0.5rem, 4.25rem);
   --font-size-subtitle: clamp(1.15rem, 1.8vw + 0.2rem, 1.85rem);
   --font-size-body: clamp(0.95rem, 0.9vw + 0.1rem, 1.1rem);
   --font-size-caption: clamp(0.75rem, 0.6vw + 0.1rem, 0.85rem);

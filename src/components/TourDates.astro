@@ -49,12 +49,8 @@ const shows = [
   <div class="tour-container">
     <div class="tour-header">
       <div class="tour-title-group">
-        <span class="section-tag">// EN VIVO // GIRA 2026 - 2027</span>
-        <h2 class="section-title">FECHAS DE CONCIERTOS</h2>
+        <h2 class="section-title">FECHAS</h2>
       </div>
-      <p class="tour-subtitle">
-        Presentación oficial en vivo de <em>¿Qué tan romántica será la muerte?</em> en salas y festivales.
-      </p>
     </div>
 
     <div class="tour-table" role="table" aria-label="Lista de conciertos">
@@ -92,12 +88,6 @@ const shows = [
         ))}
       </div>
     </div>
-
-    <div class="tour-footer">
-      <p class="booking-notice">
-        Para contrataciones en festivales y salas: <a href="mailto:booking@lotuspro.cl" class="booking-mail">cristobal@anttonias.com</a> / <span class="label-lotus">LOTUS RECORDS</span>
-      </p>
-    </div>
   </div>
 </section>
 
@@ -117,42 +107,16 @@ const shows = [
   }
 
   .tour-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
     margin-bottom: var(--space-lg);
-  }
-
-  @media (min-width: 768px) {
-    .tour-header {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-  }
-
-  .section-tag {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.25em;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 0.5rem;
   }
 
   .section-title {
     font-family: var(--font-display);
     font-size: var(--font-size-title);
-    font-weight: 800;
+    font-weight: 400;
     line-height: 1.1;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     color: var(--color-text-primary);
-  }
-
-  .tour-subtitle {
-    font-size: var(--font-size-body);
-    color: var(--color-text-muted);
-    max-width: 420px;
   }
 
   .tour-table {
