@@ -5,29 +5,53 @@ import Logo from './Logo.astro';
 
 <section class="hero-section" id="hero" aria-label="Portada de Anttonias">
   <div class="hero-media-wrapper" id="hero-media-wrapper" data-active-media="photo">
-    <!-- Fotografía oficial de la sesión en Cementerio General (Claudia Ardid) -->
+    <!-- 1. Fotografía oficial en Cementerio General (Claudia Ardid) -->
     <img 
       src="/assets/images/anttonias-cementerio-03.jpg" 
       alt="Anttonias en el Cementerio General de Santiago"
-      class="hero-media hero-photo"
-      id="hero-photo"
+      class="hero-media media-photo"
+      id="media-photo"
       loading="eager"
       fetchpriority="high"
       decoding="sync"
     />
     
-    <!-- Video loop del visualizer oficial -->
+    <!-- 2. Loop Honestidad (Bosque tipo Blair Witch Project) -->
     <video 
-      class="hero-media hero-video"
-      id="hero-video"
-      autoplay
+      class="hero-media media-video"
+      id="video-honestidad"
       muted
       loop
       playsinline
       preload="auto"
     >
+      <source src="/assets/video/loop-honestidad.mp4" type="video/mp4" />
+    </video>
+
+    <!-- 3. Loop Espíritu (Antonia en estudio/amplis y luz azul) -->
+    <video 
+      class="hero-media media-video"
+      id="video-espiritu"
+      muted
+      loop
+      playsinline
+      preload="none"
+    >
+      <source src="/assets/video/loop-espiritu.mp4" type="video/mp4" />
+    </video>
+
+    <!-- 4. Loop Verlos morir (Visualizer semitono / stop-motion) -->
+    <video 
+      class="hero-media media-video"
+      id="video-verlos"
+      muted
+      loop
+      playsinline
+      preload="none"
+    >
       <source src="/assets/video/hero-loop.mp4" type="video/mp4" />
     </video>
+
     <div class="hero-scrim" aria-hidden="true"></div>
   </div>
 
@@ -51,11 +75,15 @@ import Logo from './Logo.astro';
 
   <div class="hero-footer-bar">
     <div class="meta-item">
-      <!-- Media Switch Temporal (Foto vs Video) para evaluar con Criss -->
+      <!-- Media Switch Temporal (4 opciones para evaluar con Criss) -->
       <div class="media-toggle" role="group" aria-label="Cambiar fondo">
-        <button type="button" class="toggle-btn active" id="btn-foto" data-target="photo">FOTO</button>
+        <button type="button" class="toggle-btn active" data-target="photo">FOTO</button>
         <span class="toggle-sep">/</span>
-        <button type="button" class="toggle-btn" id="btn-video" data-target="video">VIDEO</button>
+        <button type="button" class="toggle-btn" data-target="honestidad">HONESTIDAD (BOSQUE)</button>
+        <span class="toggle-sep">/</span>
+        <button type="button" class="toggle-btn" data-target="espiritu">ESPÍRITU</button>
+        <span class="toggle-sep">/</span>
+        <button type="button" class="toggle-btn" data-target="verlos">VERLOS MORIR</button>
       </div>
     </div>
     
@@ -69,24 +97,33 @@ import Logo from './Logo.astro';
 </section>
 
 <script>
-  // Media Toggle (Foto vs Video)
+  // Media Toggle (Alternancia entre Foto y 3 Loops de Video)
   const wrapper = document.getElementById('hero-media-wrapper');
-  const btnFoto = document.getElementById('btn-foto');
-  const btnVideo = document.getElementById('btn-video');
-  const video = document.getElementById('hero-video') as HTMLVideoElement | null;
+  const toggleButtons = document.querySelectorAll<HTMLButtonElement>('.media-toggle .toggle-btn');
+  const allVideos = document.querySelectorAll<HTMLVideoElement>('.hero-media-wrapper video');
 
-  btnFoto?.addEventListener('click', () => {
-    wrapper?.setAttribute('data-active-media', 'photo');
-    btnFoto.classList.add('active');
-    btnVideo?.classList.remove('active');
-    video?.pause();
-  });
+  toggleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-target');
+      if (!target || !wrapper) return;
 
-  btnVideo?.addEventListener('click', () => {
-    wrapper?.setAttribute('data-active-media', 'video');
-    btnVideo.classList.add('active');
-    btnFoto?.classList.remove('active');
-    video?.play().catch(() => {});
+      wrapper.setAttribute('data-active-media', target);
+      toggleButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Pausar todos los videos
+      allVideos.forEach(v => {
+        v.pause();
+      });
+
+      // Si es un video, reproducir únicamente el seleccionado
+      if (target !== 'photo') {
+        const activeVid = document.getElementById(`video-${target}`) as HTMLVideoElement | null;
+        if (activeVid) {
+          activeVid.play().catch(() => {});
+        }
+      }
+    });
   });
 
   // Aberración Cromática (RGB Shift) asimétrica, 2D y con desenfoque progresivo al hacer Scroll
@@ -146,34 +183,35 @@ import Logo from './Logo.astro';
     height: 100%;
     object-fit: cover;
     object-position: center 35%;
-    filter: grayscale(100%) contrast(118%) brightness(0.72);
-    transition: opacity 0.8s var(--ease-cinematic), transform 12s ease-out;
+    opacity: 0;
+    pointer-events: none;
+    filter: grayscale(100%) contrast(115%) brightness(0.72);
+    transition: opacity 0.7s var(--ease-cinematic);
   }
 
-  .hero-photo {
+  .media-photo {
     transform: scale(1.02);
+    transition: opacity 0.7s var(--ease-cinematic), transform 12s ease-out;
   }
 
-  .hero-section:hover .hero-photo {
+  .hero-section:hover .media-photo {
     transform: scale(1.05);
   }
 
-  /* Estado Foto activo */
-  .hero-media-wrapper[data-active-media="photo"] .hero-photo {
+  /* Estados de activación de fondos */
+  .hero-media-wrapper[data-active-media="photo"] #media-photo {
     opacity: 1;
     pointer-events: auto;
   }
-  .hero-media-wrapper[data-active-media="photo"] .hero-video {
-    opacity: 0;
-    pointer-events: none;
+  .hero-media-wrapper[data-active-media="honestidad"] #video-honestidad {
+    opacity: 1;
+    pointer-events: auto;
   }
-
-  /* Estado Video activo */
-  .hero-media-wrapper[data-active-media="video"] .hero-photo {
-    opacity: 0;
-    pointer-events: none;
+  .hero-media-wrapper[data-active-media="espiritu"] #video-espiritu {
+    opacity: 1;
+    pointer-events: auto;
   }
-  .hero-media-wrapper[data-active-media="video"] .hero-video {
+  .hero-media-wrapper[data-active-media="verlos"] #video-verlos {
     opacity: 1;
     pointer-events: auto;
   }
@@ -264,7 +302,7 @@ import Logo from './Logo.astro';
     pointer-events: none;
   }
 
-  /* Canal Azul/Cian (Asimétrico: derecha y abajo, deriva desacoplada de 11.2s) */
+  /* Canal Azul/Cian (Asimétrico: derecha y abajo, deriva desacoplada de 11.4s) */
   .logo-chroma-wrap :global(.chroma-cyan) {
     z-index: 2;
     color: #00e8ff;
@@ -279,7 +317,7 @@ import Logo from './Logo.astro';
     pointer-events: none;
   }
 
-  /* Deriva analógica muy muy lenta y etérea para el canal Rojo (ciclo de 7.8s) */
+  /* Deriva analógica muy lenta y etérea para el canal Rojo (ciclo de 7.8s) */
   @keyframes slowDriftRed {
     0%, 100% {
       transform: translate(
@@ -301,7 +339,7 @@ import Logo from './Logo.astro';
     }
   }
 
-  /* Deriva analógica muy muy lenta y etérea para el canal Cian (ciclo de 11.4s) */
+  /* Deriva analógica muy lenta y etérea para el canal Cian (ciclo de 11.4s) */
   @keyframes slowDriftCyan {
     0%, 100% {
       transform: translate(
@@ -364,6 +402,8 @@ import Logo from './Logo.astro';
     font-size: 0.72rem;
     letter-spacing: 0.15em;
     color: var(--color-text-muted);
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 
   .media-toggle {
@@ -374,17 +414,18 @@ import Logo from './Logo.astro';
     border: 1px solid rgba(255, 255, 255, 0.08);
     padding: 0.25rem 0.6rem;
     border-radius: 2px;
+    flex-wrap: wrap;
   }
 
   .toggle-btn {
     background: transparent;
     border: none;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
     color: var(--color-text-muted);
     cursor: pointer;
-    padding: 0.15rem 0.3rem;
+    padding: 0.15rem 0.35rem;
     transition: color var(--duration-fast) ease;
   }
 
@@ -438,7 +479,13 @@ import Logo from './Logo.astro';
 
   @media (max-width: 768px) {
     .hero-footer-bar {
+      flex-direction: column;
+      align-items: center;
       gap: 1rem;
+    }
+
+    .media-toggle {
+      justify-content: center;
     }
   }
 </style>
