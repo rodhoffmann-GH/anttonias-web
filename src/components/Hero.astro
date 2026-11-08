@@ -4,7 +4,7 @@ import Logo from './Logo.astro';
 ---
 
 <section class="hero-section" id="hero" aria-label="Portada de Anttonias">
-  <div class="hero-media-wrapper" id="hero-media-wrapper" data-active-media="photo">
+  <div class="hero-media-wrapper" id="hero-media-wrapper" data-active-media="verlos">
     <!-- 1. Fotografía oficial en Cementerio General (Claudia Ardid) -->
     <img 
       src="/assets/images/anttonias-cementerio-03.jpg" 
@@ -23,7 +23,7 @@ import Logo from './Logo.astro';
       muted
       loop
       playsinline
-      preload="auto"
+      preload="none"
     >
       <source src="/assets/video/loop-honestidad.mp4" type="video/mp4" />
     </video>
@@ -44,10 +44,11 @@ import Logo from './Logo.astro';
     <video 
       class="hero-media media-video"
       id="video-verlos"
+      autoplay
       muted
       loop
       playsinline
-      preload="none"
+      preload="auto"
     >
       <source src="/assets/video/hero-loop.mp4" type="video/mp4" />
     </video>
@@ -101,6 +102,12 @@ import Logo from './Logo.astro';
   const wrapper = document.getElementById('hero-media-wrapper');
   const toggleButtons = document.querySelectorAll<HTMLButtonElement>('.media-toggle .toggle-btn');
   const allVideos = document.querySelectorAll<HTMLVideoElement>('.hero-media-wrapper video');
+
+  // Reproducir loop activo por defecto (Verlos morir)
+  const defaultVideo = document.getElementById('video-verlos') as HTMLVideoElement | null;
+  if (defaultVideo) {
+    defaultVideo.play().catch(() => {});
+  }
 
   toggleButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -408,7 +415,7 @@ import Logo from './Logo.astro';
   }
 
   .media-toggle {
-    display: inline-flex;
+    display: none;
     align-items: center;
     gap: 0.35rem;
     background: rgba(255, 255, 255, 0.03);

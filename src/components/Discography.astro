@@ -104,6 +104,24 @@ const releases = [
     gap: 2.5rem;
   }
 
+  @media (max-width: 768px) {
+    .disco-header {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      text-align: center;
+      letter-spacing: 0.14em;
+    }
+
+    .releases-grid {
+      gap: 1.75rem;
+    }
+  }
+
   @media (min-width: 768px) {
     .releases-grid {
       grid-template-columns: repeat(3, 1fr);

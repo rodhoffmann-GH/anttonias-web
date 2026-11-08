@@ -181,12 +181,14 @@ import Logo from './Logo.astro';
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 6px;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     background: transparent;
     border: none;
     cursor: pointer;
+    padding: 0;
   }
 
   @media (min-width: 860px) {
@@ -199,40 +201,77 @@ import Logo from './Logo.astro';
     width: 24px;
     height: 1px;
     background-color: var(--color-text-primary);
-    transition: transform var(--duration-normal) var(--ease-cinematic);
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color var(--duration-fast) ease;
+    transform-origin: center;
+  }
+
+  .mobile-toggle[aria-expanded="true"] .toggle-bar:first-child {
+    transform: translateY(3.5px) rotate(45deg);
+  }
+
+  .mobile-toggle[aria-expanded="true"] .toggle-bar:last-child {
+    transform: translateY(-3.5px) rotate(-45deg);
   }
 
   .mobile-menu {
-    display: none;
     position: fixed;
     top: 60px;
     left: 0;
     width: 100%;
     height: calc(100vh - 60px);
-    background: rgba(8, 8, 8, 0.98);
-    backdrop-filter: blur(16px);
+    background: rgba(6, 6, 6, 0.82);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 3rem 2rem;
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     z-index: calc(var(--z-header) - 1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.35s ease;
+    pointer-events: none;
   }
 
   .mobile-menu.is-open {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
   }
 
   .mobile-nav-links {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    align-items: center;
+    text-align: center;
+    gap: 2.25rem;
+    width: 100%;
+    max-width: 320px;
   }
 
   .mobile-nav-link {
     font-family: var(--font-display);
-    font-size: 1.5rem;
-    letter-spacing: 0.2em;
-    color: var(--color-text-primary);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding-bottom: 1rem;
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    color: rgba(240, 237, 230, 0.82);
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    transition: color var(--duration-fast) ease,
+                letter-spacing var(--duration-fast) ease;
+    position: relative;
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link:active {
+    color: #ffffff;
+    letter-spacing: 0.32em;
   }
 </style>
 

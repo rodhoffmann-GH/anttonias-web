@@ -85,6 +85,19 @@
   --duration-slow: 650ms;
 }
 
+/* --------------------------------------------------------------------------
+   AJUSTES RESPONSIVOS GLOBALES (Mobile First Compact Spacing)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  :root {
+    --space-md: clamp(0.75rem, 1.5vw, 1.25rem);
+    --space-lg: clamp(1.25rem, 3vw, 2rem);
+    --space-xl: clamp(2.25rem, 5vw, 3rem);
+    --container-padding: clamp(1rem, 3.5vw, 1.5rem);
+    --font-size-title: clamp(1.6rem, 5.5vw, 2.2rem);
+  }
+}
+
 /* Selector para conmutar a acento Sangre Seca */
 [data-accent="blood"] {
   --accent: var(--accent-blood);
