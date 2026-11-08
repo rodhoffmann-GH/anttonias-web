@@ -16,6 +16,7 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://anttonias.com');
+const fullImageUrl = image.startsWith('http') ? image : new URL(image, canonicalURL).toString();
 
 const schemaMusicGroup = {
   "@context": "https://schema.org",
@@ -66,7 +67,7 @@ const schemaMusicGroup = {
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={image} />
+  <meta property="og:image" content={fullImageUrl} />
   <meta property="og:locale" content="es_CL" />
 
   <!-- Twitter -->
@@ -74,7 +75,7 @@ const schemaMusicGroup = {
   <meta name="twitter:url" content={canonicalURL} />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={image} />
+  <meta name="twitter:image" content={fullImageUrl} />
 
   <!-- Precalentamiento de Red hacia Bóveda R2 Cloudflare (0 ms Handshake) -->
   <link rel="preconnect" href="https://vault-anttonias.rod.cl" crossorigin />

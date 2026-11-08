@@ -23,7 +23,7 @@ html.lenis body {
 }
 
 .lenis.lenis-smooth {
-  scroll-behavior: auto !important; /* Excepción documentada: requerida por la API interna de Lenis */
+  scroll-behavior: auto;
 }
 
 .lenis.lenis-smooth [data-lenis-prevent] {

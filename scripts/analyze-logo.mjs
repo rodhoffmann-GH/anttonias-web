@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 
 async function analyzeLogoPixels() {
-  const { data, info } = await sharp('f:/Antigravity/Anttonias WEB/public/assets/images/logo-wide-300-1500.jpg')
+  const { info } = await sharp('f:/Antigravity/Anttonias WEB/public/assets/images/logo-wide-300-1500.jpg')
     .raw()
     .toBuffer({ resolveWithObject: true });
     
