@@ -5,35 +5,30 @@ const photos = [
   {
     src: "/assets/images/anttonias-cementerio-01.jpg",
     alt: "Anttonias en el Cementerio General de Santiago - Retrato Coral",
-    caption: "RETRATO PRINCIPAL · CEMENTERIO GENERAL DE RECOLETA",
     credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
     aspect: "monument"
   },
   {
     src: "/assets/images/anttonias-cementerio-03.jpg",
     alt: "Antonia Holzapfel y la atmósfera fúnebre",
-    caption: "PRIMER PLANO · ¿QUÉ TAN ROMÁNTICA SERÁ LA MUERTE?",
-    credits: "ARTE: CLAUDIA ARDID",
+    credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
     aspect: "portrait"
   },
   {
     src: "/assets/images/anttonias-cementerio-04.jpg",
     alt: "Banda entre sepulcros y cruces de hierro",
-    caption: "PANORÁMICA DE CRIPTAS · PERSPECTIVA ANALÓGICA",
-    credits: "SESIÓN LOTUS RECORDS",
+    credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
     aspect: "landscape"
   },
   {
     src: "/assets/images/anttonias-cementerio-103.jpg",
     alt: "Detalle fúnebre y contraste en blanco y negro",
-    caption: "DETALLE ATMOSFÉRICO · CEMENTERIO GENERAL",
-    credits: "FOTOGRAFÍA ANALÓGICA 35MM",
+    credits: "FOTOGRAFÍA: CLAUDIA ARDID (2026)",
     aspect: "square"
   },
   {
     src: "/assets/images/anttonias-debut-rod-659.jpg",
     alt: "Anttonias en vivo - Era debut",
-    caption: "ARCHIVO DEBUT · PRIMEROS ESCENARIOS",
     credits: "FOTOGRAFÍA: ROD HOFFMANN",
     aspect: "portrait"
   }
@@ -58,7 +53,6 @@ const photos = [
             />
           </div>
           <figcaption class="photo-caption">
-            <span class="caption-title">{p.caption}</span>
             <span class="caption-credits">{p.credits}</span>
           </figcaption>
         </figure>
@@ -181,18 +175,11 @@ const photos = [
 
   .photo-caption {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-end;
     font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    padding: 0.25rem 0.25rem 0;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .caption-title {
-    color: var(--color-text-primary);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    padding: 0.4rem 0.25rem 0;
   }
 
   .caption-credits {

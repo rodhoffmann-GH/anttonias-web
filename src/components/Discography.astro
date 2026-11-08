@@ -8,7 +8,6 @@ const releases = [
     year: "NOVIEMBRE 2026",
     label: "LOTUS RECORDS",
     image: "/assets/images/album-cover-romantica-muerte-3000.jpg",
-    highlight: "LANZAMIENTO VIGENTE",
     spotify: "https://open.spotify.com/artist/anttonias"
   },
   {
@@ -17,7 +16,6 @@ const releases = [
     year: "AGOSTO 2025",
     label: "INDEPENDIENTE",
     image: "/assets/images/album-cover-debut-3000.jpg",
-    highlight: "DEBUT HISTÓRICO",
     spotify: "https://open.spotify.com/artist/anttonias"
   },
   {
@@ -26,7 +24,6 @@ const releases = [
     year: "2024",
     label: "INDEPENDIENTE",
     image: "/assets/images/single-atado-sentimiento-3000.jpg",
-    highlight: "PRIMER HIMNO",
     spotify: "https://open.spotify.com/artist/anttonias"
   }
 ];
@@ -48,7 +45,6 @@ const releases = [
               class="release-cover"
               loading="lazy"
             />
-            <span class="badge-highlight">{r.highlight}</span>
           </div>
 
           <div class="release-body">
@@ -148,20 +144,6 @@ const releases = [
     transform: scale(1.04);
   }
 
-  .badge-highlight {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    padding: 0.35rem 0.65rem;
-    background: rgba(8, 8, 8, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.18em;
-    color: var(--color-text-primary);
-    backdrop-filter: blur(6px);
-  }
-
   .release-body {
     padding: 1.5rem;
     display: flex;
@@ -199,12 +181,11 @@ const releases = [
     font-size: 0.72rem;
     letter-spacing: 0.12em;
     color: var(--color-text-muted);
-    margin-bottom: 1.5rem;
   }
 
   .release-footer {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
+    margin-top: auto;
+    padding-top: 1.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
   }
 
