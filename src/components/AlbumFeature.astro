@@ -481,27 +481,66 @@ const tracks = [
 </style>
 
 <script>
-  let activeAudio: HTMLAudioElement | null = null;
-  let currentItem: HTMLElement | null = null;
+  const audio = new Audio();
+  audio.preload = 'auto';
 
-  function resetCurrent() {
-    if (currentItem) {
-      currentItem.classList.remove('is-playing', 'is-buffering');
-      const bar = currentItem.querySelector<HTMLElement>('.track-progress-bar');
-      if (bar) bar.style.width = '0%';
-      const btn = currentItem.querySelector<HTMLButtonElement>('[data-play-trigger]');
-      const title = currentItem.querySelector('.track-title')?.textContent?.trim() || '';
+  let currentItem: HTMLElement | null = null;
+  const trackItems = document.querySelectorAll<HTMLElement>('[data-track-item]');
+
+  function resetAllTracks(resetProgress = true) {
+    trackItems.forEach((el) => {
+      el.classList.remove('is-playing', 'is-buffering');
+      if (resetProgress) {
+        const bar = el.querySelector<HTMLElement>('.track-progress-bar');
+        if (bar) bar.style.width = '0%';
+      }
+      const btn = el.querySelector<HTMLButtonElement>('[data-play-trigger]');
+      const title = el.querySelector('.track-title')?.textContent?.trim() || '';
       if (btn) btn.setAttribute('aria-label', `Reproducir adelanto de 15 segundos: ${title}`);
-      currentItem = null;
-    }
+    });
   }
 
-  const trackItems = document.querySelectorAll<HTMLElement>('[data-track-item]');
+  audio.addEventListener('timeupdate', () => {
+    if (!currentItem) return;
+    const duration = audio.duration && isFinite(audio.duration) ? audio.duration : 15;
+    const progress = (audio.currentTime / duration) * 100;
+    const bar = currentItem.querySelector<HTMLElement>('.track-progress-bar');
+    if (bar) bar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+  });
+
+  audio.addEventListener('play', () => {
+    resetAllTracks(false);
+    if (currentItem) {
+      currentItem.classList.remove('is-buffering');
+      currentItem.classList.add('is-playing');
+      const btn = currentItem.querySelector<HTMLButtonElement>('[data-play-trigger]');
+      const title = currentItem.querySelector('.track-title')?.textContent?.trim() || '';
+      if (btn) btn.setAttribute('aria-label', `Pausar adelanto de 15 segundos: ${title}`);
+    }
+  });
+
+  audio.addEventListener('pause', () => {
+    if (currentItem) {
+      currentItem.classList.remove('is-playing', 'is-buffering');
+      const btn = currentItem.querySelector<HTMLButtonElement>('[data-play-trigger]');
+      const title = currentItem.querySelector('.track-title')?.textContent?.trim() || '';
+      if (btn) btn.setAttribute('aria-label', `Reanudar adelanto de 15 segundos: ${title}`);
+    }
+  });
+
+  audio.addEventListener('ended', () => {
+    resetAllTracks(true);
+    currentItem = null;
+  });
+
+  audio.addEventListener('error', () => {
+    resetAllTracks(true);
+    currentItem = null;
+  });
 
   trackItems.forEach((item) => {
     const btn = item.querySelector<HTMLButtonElement>('[data-play-trigger]');
     const previewUrl = item.dataset.preview;
-    const title = item.querySelector('.track-title')?.textContent?.trim() || '';
 
     if (!btn || !previewUrl) return;
 
@@ -509,59 +548,33 @@ const tracks = [
       e.stopPropagation();
 
       // Si hace clic en el tema que ya está sonando -> pausar
-      if (currentItem === item && activeAudio && !activeAudio.paused) {
-        activeAudio.pause();
-        item.classList.remove('is-playing');
-        btn.setAttribute('aria-label', `Reanudar adelanto de 15 segundos: ${title}`);
+      if (currentItem === item && !audio.paused && !audio.ended) {
+        audio.pause();
         return;
       }
 
       // Si estaba en pausa en este mismo tema -> reanudar
-      if (currentItem === item && activeAudio && activeAudio.paused) {
-        activeAudio.play().then(() => {
-          item.classList.add('is-playing');
-          btn.setAttribute('aria-label', `Pausar adelanto de 15 segundos: ${title}`);
-        }).catch(() => {});
+      if (currentItem === item && audio.paused && !audio.ended && audio.src === previewUrl) {
+        audio.play().catch(() => {
+          resetAllTracks(true);
+          currentItem = null;
+        });
         return;
       }
 
-      // Detener cualquier reproducción previa
-      if (activeAudio) {
-        activeAudio.pause();
-        activeAudio.src = '';
-      }
-      resetCurrent();
+      // Cambiar de tema o iniciar desde cero
+      audio.pause();
+      resetAllTracks(true);
 
-      // Activar nuevo tema
       currentItem = item;
       item.classList.add('is-buffering', 'is-playing');
-      btn.setAttribute('aria-label', `Pausar adelanto de 15 segundos: ${title}`);
 
-      activeAudio = new Audio(previewUrl);
-      activeAudio.preload = 'auto';
-
-      activeAudio.addEventListener('timeupdate', () => {
-        if (!activeAudio || currentItem !== item) return;
-        const duration = activeAudio.duration && isFinite(activeAudio.duration) ? activeAudio.duration : 15;
-        const progress = (activeAudio.currentTime / duration) * 100;
-        const bar = item.querySelector<HTMLElement>('.track-progress-bar');
-        if (bar) bar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
-      });
-
-      activeAudio.addEventListener('ended', () => {
-        resetCurrent();
-      });
-
-      activeAudio.addEventListener('error', () => {
-        resetCurrent();
-      });
-
-      activeAudio.play().then(() => {
-        item.classList.remove('is-buffering');
-        item.classList.add('is-playing');
-      }).catch((err) => {
+      audio.src = previewUrl;
+      audio.currentTime = 0;
+      audio.play().catch((err) => {
         console.warn('Audio preview error:', err);
-        resetCurrent();
+        resetAllTracks(true);
+        currentItem = null;
       });
     });
   });
