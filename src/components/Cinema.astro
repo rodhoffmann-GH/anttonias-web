@@ -1,5 +1,6 @@
 ---
 // src/components/Cinema.astro
+import SectionHeading from './SectionHeading.astro';
 
 const videos = [
   {
@@ -43,15 +44,7 @@ const videos = [
 
 <section class="cinema-section" id="videos" aria-label="Videografía oficial">
   <div class="cinema-container">
-    <div class="cinema-header">
-      <div>
-        <h2 class="section-title">VIDEOGRAFÍA</h2>
-      </div>
-      <a href="https://www.youtube.com/@anttonias" target="_blank" rel="noopener noreferrer" class="yt-channel-link">
-        <span>CANAL OFICIAL DE YOUTUBE</span>
-        <span aria-hidden="true">↗</span>
-      </a>
-    </div>
+    <SectionHeading>VIDEOGRAFÍA</SectionHeading>
 
     <div class="cinema-grid">
       {videos.map((v) => (

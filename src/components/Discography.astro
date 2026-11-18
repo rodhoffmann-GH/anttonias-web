@@ -1,5 +1,6 @@
 ---
 // src/components/Discography.astro
+import SectionHeading from './SectionHeading.astro';
 
 const releases = [
   {
@@ -31,9 +32,7 @@ const releases = [
 
 <section class="discography-section" id="catalogo" aria-label="Catálogo discográfico completo">
   <div class="disco-container">
-    <div class="disco-header">
-      <h2 class="section-title">DISCOGRAFÍA</h2>
-    </div>
+    <SectionHeading>DISCOGRAFÍA</SectionHeading>
 
     <div class="releases-grid">
       {releases.map((r) => (

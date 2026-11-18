@@ -1,5 +1,6 @@
 ---
 // src/components/TourDates.astro
+import SectionHeading from './SectionHeading.astro';
 
 const shows = [
   {
@@ -39,11 +40,7 @@ const shows = [
 
 <section class="tour-section" id="gira" aria-label="Fechas de conciertos y gira en vivo">
   <div class="tour-container">
-    <div class="tour-header">
-      <div class="tour-title-group">
-        <h2 class="section-title">FECHAS</h2>
-      </div>
-    </div>
+    <SectionHeading>FECHAS</SectionHeading>
 
     <div class="tour-table" role="table" aria-label="Lista de conciertos">
       <div class="table-head" role="row">

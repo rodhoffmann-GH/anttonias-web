@@ -1,5 +1,6 @@
 ---
 // src/components/AlbumFeature.astro
+import SectionHeading from './SectionHeading.astro';
 
 const tracks = [
   { num: "01", title: "Verlos morir", duration: "3:17", preview: "https://vault-anttonias.rod.cl/audio/preview/preview-01.mp3" },
@@ -18,9 +19,7 @@ const tracks = [
 
 <section class="album-section" id="disco" aria-label="El nuevo álbum: ¿Qué tan romántica será la muerte?">
   <div class="album-container">
-    <div class="section-header">
-      <h2 class="section-title">¿QUÉ TAN ROMÁNTICA SERÁ LA MUERTE?</h2>
-    </div>
+    <SectionHeading>¿QUÉ TAN ROMÁNTICA<br />SERÁ LA MUERTE?</SectionHeading>
 
     <div class="album-grid">
       <!-- Columna Izquierda: Arte de Tapa & Streaming -->

@@ -1,5 +1,6 @@
 ---
 // src/components/Gallery.astro
+import SectionHeading from './SectionHeading.astro';
 
 const VAULT_BASE = "https://vault-anttonias.rod.cl/gallery";
 
@@ -72,11 +73,9 @@ const photos = rawPhotos.map(p => ({
 
 <section class="gallery-section" id="galeria" aria-label="Galería fotográfica oficial">
   <div class="gallery-container">
-    <div class="gallery-header">
-      <h2 class="section-title">FOTOGRAFÍAS</h2>
-    </div>
+    <SectionHeading>FOTOGRAFÍAS</SectionHeading>
 
-    <!-- Masonry de 3 Columnas -->
+    <!-- Masonry de 4 Columnas -->
     <div class="gallery-layout">
       {photos.map((p, idx) => (
         <figure class="photo-card">
