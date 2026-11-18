@@ -2,10 +2,10 @@
 // src/components/PressKit.astro
 ---
 
-<section class="presskit-section" id="prensa" aria-label="Kit de prensa y contacto oficial">
-  <div class="presskit-container">
+<section class="presskit-section" id="contacto" aria-label="Contacto oficial y kit de prensa">
+  <div class="presskit-container" id="prensa">
     <div class="presskit-header">
-      <h2 class="section-title">DOSSIER & CONTACTO</h2>
+      <h2 class="section-title">CONTACTO</h2>
     </div>
 
     <div class="presskit-grid">
@@ -14,60 +14,31 @@
         <h3 class="panel-heading">BIOGRAFÍA OFICIAL</h3>
         <div class="bio-text">
           <p>
-            <strong>Anttonias</strong> es una banda de indie rock y post-punk originaria del sector poniente de Santiago de Chile (Padre Hurtado). El proyecto está integrado por <strong>Antonia Holzapfel</strong> (voz principal), <strong>Diego Sanzana</strong> (guitarra), <strong>Oscar Concha</strong> (guitarra), <strong>Felipe Sanzana</strong> (bajo) y <strong>Agustín Plaza</strong> (batería).
+            Inspirados en la estética y las corrientes musicales de los años 90, <strong>Anttonias</strong> es una banda de rock alternativo, garage rock y post punk revival formada en 2023, y uno de los nombres clave de la “Nueva Escena” del rock chileno.
           </p>
           <p>
-            Con una sonoridad arraigada en el filo guitarrero de los años 80 —con ecos a The Cure, Joy Division y The Stone Roses— la agrupación consolidó su primer impacto en la escena alternativa con su disco debut homónimo (2025) y su tema insignia <em>"Atado a tu sentimiento"</em>.
-          </p>
-          <p>
-            En noviembre de 2026, la banda presenta su segundo álbum de estudio, <em>"¿Qué tan romántica será la muerte?"</em>, publicado bajo el sello <strong>Lotus Records</strong> con distribución de Warner Music Chile. Producido en Estudios del Sur, la obra está acompañada de una dirección visual registrada en el Cementerio General de Recoleta.
+            La integran <strong>Antonia Holzapfel</strong> (voz), <strong>Diego Sansana</strong> (guitarra), <strong>Óscar Concha</strong> (guitarra), <strong>Felipe Sanzana</strong> (bajo) y <strong>Agustín Plaza</strong> (batería).
           </p>
         </div>
       </div>
 
-      <!-- Columna Derecha: Descargas Técnicas y Contacto -->
+      <!-- Columna Derecha: Contacto Directo & Pack de Prensa -->
       <div class="resources-panel">
-        <div class="downloads-block">
-          <h3 class="panel-heading">ARCHIVOS TÉCNICOS & DESCARGAS</h3>
-          <div class="download-items">
-            <div class="download-card">
-              <div class="card-info">
-                <span class="card-title">PACK FOTOS DE PRENSA (3000px Hi-Res)</span>
-                <span class="card-desc">Sesión Cementerio General en blanco y negro (JPG 300dpi / RAW)</span>
-              </div>
-              <a href="https://vault-anttonias.rod.cl/gallery/photo-03-2560.jpg" download="Anttonias_Prensa_Cementerio.jpg" class="btn-download">
-                <span>DESCARGAR</span>
-                <span aria-hidden="true">↓</span>
-              </a>
-            </div>
-
-            <div class="download-card">
-              <div class="card-info">
-                <span class="card-title">DOSSIER DE PRENSA & BIO (PDF)</span>
-                <span class="card-desc">Ficha biográfica completa, clipping de prensa y discografía</span>
-              </div>
-              <a href="#contacto-booking" class="btn-download">
-                <span>SOLICITAR</span>
-                <span aria-hidden="true">→</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="contact-block" id="contacto-booking">
-          <h3 class="panel-heading">MANAGEMENT & BOOKING</h3>
-          <div class="contact-details">
-            <div class="contact-entry">
-              <span class="entry-role">MANAGEMENT</span>
-              <span class="entry-name">Cristóbal Hardy Hoffmann</span>
-              <a href="mailto:cristobal@anttonias.com" class="entry-link">cristobal@anttonias.com</a>
-            </div>
-
-            <div class="contact-entry">
-              <span class="entry-role">SELLO DISCOGRÁFICO & BOOKING</span>
-              <span class="entry-name">Lotus Records / Warner Music</span>
-              <a href="mailto:booking@lotuspro.cl" class="entry-link">booking@lotuspro.cl</a>
-            </div>
+        <h3 class="panel-heading">CONTACTO DIRECTO & PRENSA</h3>
+        <div class="contact-card">
+          <span class="contact-label">CORREO OFICIAL & BOOKING</span>
+          <a href="mailto:anttoniasoficial.contacto@gmail.com" class="contact-email">
+            anttoniasoficial.contacto@gmail.com
+          </a>
+          <p class="contact-desc">
+            Contacto general para conciertos, booking, prensa, sincronización y entrevistas.
+          </p>
+          
+          <div class="press-cta-wrap">
+            <a href="/vault" class="btn-pack-prensa">
+              <span>PACK DE PRENSA</span>
+              <span class="btn-arrow" aria-hidden="true">→</span>
+            </a>
           </div>
         </div>
       </div>
@@ -164,123 +135,86 @@
   .resources-panel {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
   }
 
-  .download-items {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .download-card {
-    padding: 1.25rem;
+  .contact-card {
+    padding: 1.75rem;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.85rem;
     transition: border-color var(--duration-fast) ease;
   }
 
-  @media (min-width: 540px) {
-    .download-card {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
+  .contact-card:hover {
+    border-color: rgba(255, 255, 255, 0.2);
   }
 
-  .download-card:hover {
-    border-color: var(--accent);
-  }
-
-  .card-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .card-title {
-    font-family: var(--font-display);
-    font-size: 0.95rem;
-    letter-spacing: 0.06em;
-    color: var(--color-text-primary);
-  }
-
-  .card-desc {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--color-text-faint);
-  }
-
-  .btn-download {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.15rem;
-    background: var(--color-surface-elevated);
-    border: 1px solid var(--color-border);
-    color: var(--color-text-primary);
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    align-self: flex-start;
-    transition: background-color var(--duration-fast) ease,
-                border-color var(--duration-fast) ease,
-                color var(--duration-fast) ease;
-  }
-
-  @media (min-width: 540px) {
-    .btn-download {
-      align-self: center;
-    }
-  }
-
-  .btn-download:hover {
-    background-color: var(--accent);
-    border-color: var(--accent);
-    color: var(--color-text-primary);
-  }
-
-  .contact-details {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-
-  .contact-entry {
-    padding: 1.25rem;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-  }
-
-  .entry-role {
+  .contact-label {
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     color: var(--accent);
   }
 
-  .entry-name {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    letter-spacing: 0.05em;
-    color: var(--color-text-primary);
-  }
-
-  .entry-link {
+  .contact-email {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    color: var(--color-text-primary);
     text-decoration: underline;
+    text-underline-offset: 4px;
+    word-break: break-all;
     transition: color var(--duration-fast) ease;
   }
 
-  .entry-link:hover {
-    color: var(--color-text-primary);
+  .contact-email:hover {
+    color: var(--accent);
+  }
+
+  .contact-desc {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.6;
+    color: var(--color-text-faint);
+    margin-top: 0.25rem;
+  }
+
+  .press-cta-wrap {
+    margin-top: 1rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .btn-pack-prensa {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.75rem;
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    color: #000000;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-decoration: none;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .btn-pack-prensa:hover {
+    background: transparent;
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+
+  .btn-arrow {
+    transition: transform var(--duration-fast) ease;
+  }
+
+  .btn-pack-prensa:hover .btn-arrow {
+    transform: translateX(4px);
   }
 </style>

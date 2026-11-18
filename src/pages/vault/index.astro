@@ -1,0 +1,1192 @@
+---
+// src/pages/vault/index.astro
+// Dossier & Pack de Prensa Oficial de Anttonias
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const VAULT_BASE = "https://vault-anttonias.rod.cl/gallery";
+
+const items = [
+  {
+    id: "photo-01",
+    filename: "Anttonias_Prensa_01_Nocturna.jpg",
+    title: "Anttonias — Sesión Nocturna Exterior",
+    credits: "Fotografía: Emily Brea (2026)",
+    webUrl: `${VAULT_BASE}/photo-01-800.jpg`,
+    altaUrl: `${VAULT_BASE}/photo-01-2560.jpg`,
+    webSize: "57 KB",
+    altaSize: "457 KB",
+    res: "6000 × 4000 px"
+  },
+  {
+    id: "photo-02",
+    filename: "Anttonias_Prensa_02_Antonia.jpg",
+    title: "Antonia Holzapfel — Primer Plano",
+    credits: "Fotografía: Claudia Ardid (2026)",
+    webUrl: `${VAULT_BASE}/photo-02-800.jpg`,
+    altaUrl: `${VAULT_BASE}/photo-02-2560.jpg`,
+    webSize: "108 KB",
+    altaSize: "1.48 MB",
+    res: "6000 × 4000 px"
+  },
+  {
+    id: "photo-03",
+    filename: "Anttonias_Prensa_03_Cruces.jpg",
+    title: "Anttonias — Entre Sepulcros y Cruces de Hierro",
+    credits: "Fotografía: Claudia Ardid (2026)",
+    webUrl: `${VAULT_BASE}/photo-03-800.jpg`,
+    altaUrl: `${VAULT_BASE}/photo-03-2560.jpg`,
+    webSize: "120 KB",
+    altaSize: "1.50 MB",
+    res: "2999 × 4000 px"
+  },
+  {
+    id: "photo-04",
+    filename: "Anttonias_Prensa_04_Lapidas.jpg",
+    title: "Anttonias — Detalle de Lápidas",
+    credits: "Fotografía: Claudia Ardid (2026)",
+    webUrl: `${VAULT_BASE}/photo-04-800.jpg`,
+    altaUrl: `${VAULT_BASE}/photo-04-2560.jpg`,
+    webSize: "135 KB",
+    altaSize: "1.89 MB",
+    res: "4859 × 6479 px"
+  },
+  {
+    id: "photo-05",
+    filename: "Anttonias_Prensa_05_Mausoleo.jpg",
+    title: "Anttonias — Frente al Mausoleo",
+    credits: "Fotografía: Claudia Ardid (2026)",
+    webUrl: `${VAULT_BASE}/photo-05-800.jpg`,
+    altaUrl: `${VAULT_BASE}/photo-05-2560.jpg`,
+    webSize: "90 KB",
+    altaSize: "1.10 MB",
+    res: "8192 × 5464 px"
+  },
+  {
+    id: "photo-06",
+    filename: "Anttonias_Prensa_06_Guitarras.jpg",
+    title: "Anttonias — Arquitectura y Guitarras",
+    credits: "Fotografía: Claudia Ardid (2026)",
+    webUrl: `${VAULT_BASE}/photo-06-800.jpg`,
+    altaUrl: `${VAULT_BASE}/photo-06-2560.jpg`,
+    webSize: "115 KB",
+    altaSize: "1.42 MB",
+    res: "4985 × 6647 px"
+  },
+  {
+    id: "photo-07",
+    filename: "Anttonias_Prensa_07_Perspectiva.jpg",
+    title: "Anttonias — Perspectiva Diagonal",
+    credits: "Fotografía: Claudia Ardid (2026)",
+    webUrl: `${VAULT_BASE}/photo-07-800.jpg`,
+    altaUrl: `${VAULT_BASE}/photo-07-2560.jpg`,
+    webSize: "98 KB",
+    altaSize: "1.25 MB",
+    res: "6656 × 4440 px"
+  },
+  {
+    id: "photo-08",
+    filename: "Anttonias_Prensa_08_Exteriores.jpg",
+    title: "Anttonias — Exteriores Nocturnos",
+    credits: "Fotografía: Emily Brea (2026)",
+    webUrl: `${VAULT_BASE}/photo-08-800.jpg`,
+    altaUrl: `${VAULT_BASE}/photo-08-2560.jpg`,
+    webSize: "53 KB",
+    altaSize: "460 KB",
+    res: "6000 × 4000 px"
+  },
+  {
+    id: "photo-09",
+    filename: "Anttonias_Prensa_09_Criptas.jpg",
+    title: "Anttonias — Pasaje de Criptas",
+    credits: "Fotografía: Claudia Ardid (2026)",
+    webUrl: `${VAULT_BASE}/photo-09-800.jpg`,
+    altaUrl: `${VAULT_BASE}/photo-09-2560.jpg`,
+    webSize: "93 KB",
+    altaSize: "918 KB",
+    res: "6656 × 4440 px"
+  },
+  {
+    id: "photo-10",
+    filename: "Anttonias_Prensa_10_Composicion.jpg",
+    title: "Anttonias — Composición Fúnebre",
+    credits: "Fotografía: Claudia Ardid (2026)",
+    webUrl: `${VAULT_BASE}/photo-10-800.jpg`,
+    altaUrl: `${VAULT_BASE}/photo-10-2560.jpg`,
+    webSize: "133 KB",
+    altaSize: "1.22 MB",
+    res: "8192 × 5464 px"
+  },
+  {
+    id: "photo-11",
+    filename: "Anttonias_Prensa_11_Vivo_Debut.jpg",
+    title: "Anttonias — En Vivo (Era Debut)",
+    credits: "Fotografía: Rod Hoffmann (2025)",
+    webUrl: `${VAULT_BASE}/photo-11-800.jpg`,
+    altaUrl: `${VAULT_BASE}/photo-11-2560.jpg`,
+    webSize: "42 KB",
+    altaSize: "423 KB",
+    res: "2560 × 2560 px"
+  }
+];
+---
+
+<Layout
+  title="ANTTONIAS · Dossier & Pack de Prensa Oficial (Vault)"
+  description="Bóveda de prensa oficial de Anttonias. Descarga directa de fotografías en alta resolución (300dpi / 2560px), artes oficiales y especificaciones técnicas para medios y booking."
+>
+  <Nav />
+
+  <main class="vault-page">
+    <div class="vault-container">
+      <!-- Encabezado de Autor / Dossier -->
+      <header class="vault-header">
+        <div class="vault-identity">
+          <span class="vault-tag">BÓVEDA DE PRENSA & DOSSIER TÉCNICO</span>
+          <h1 class="vault-artist">ANTTONIAS</h1>
+          <p class="vault-project">
+            ¿QUÉ TAN ROMÁNTICA SERÁ LA MUERTE? · MATERIAL OFICIAL PARA MEDIOS
+          </p>
+          
+          <div class="vault-meta-row">
+            <span class="vault-spec">11 FOTOGRAFÍAS OFICIALES</span>
+            <span class="meta-sep">/</span>
+            <span class="vault-spec">FORMATO MÁSTER 2560px (300 DPI) & WEB</span>
+            <span class="meta-sep">/</span>
+            <span class="vault-spec">NOVIEMBRE 2026</span>
+          </div>
+        </div>
+
+        <!-- Acciones Principales de Descarga -->
+        <div class="vault-actions">
+          <button type="button" id="btn-download-selected" class="vault-btn btn-primary" disabled>
+            <span class="btn-text">DESCARGAR SELECCIÓN</span>
+            <span id="selected-counter" class="btn-badge">0</span>
+          </button>
+
+          <button type="button" id="btn-download-all" class="vault-btn btn-secondary">
+            <span>DESCARGAR TODAS (ALTA)</span>
+            <span class="btn-arrow" aria-hidden="true">↓</span>
+          </button>
+
+          <button type="button" id="btn-copy-link" class="vault-btn btn-tertiary">
+            <span id="copy-btn-text">COPIAR ENLACE</span>
+            <svg class="copy-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Grilla de Fotografías del Vault -->
+      <section class="vault-grid" aria-label="Catálogo fotográfico de prensa">
+        {items.map((it, idx) => (
+          <article class="vault-card" data-idx={idx} data-web={it.webUrl} data-alta={it.altaUrl} data-file={it.filename}>
+            <div class="card-media">
+              <button
+                type="button"
+                class="card-select-btn"
+                data-select-trigger
+                data-idx={idx}
+                aria-label={`Seleccionar ${it.filename}`}
+                title="Seleccionar para descarga múltiple"
+              >
+                <span class="check-mark">✓</span>
+              </button>
+
+              <button
+                type="button"
+                class="card-preview-trigger"
+                data-zoom-trigger
+                data-idx={idx}
+                aria-label={`Ampliar fotografía: ${it.title}`}
+              >
+                <img
+                  src={it.webUrl}
+                  alt={it.title}
+                  class="card-img"
+                  loading={idx < 3 ? "eager" : "lazy"}
+                  decoding="async"
+                />
+                <span class="zoom-badge" aria-hidden="true">+</span>
+              </button>
+            </div>
+
+            <div class="card-footer">
+              <div class="card-info">
+                <span class="card-filename">{it.filename}</span>
+                <span class="card-credits">{it.credits}</span>
+                <span class="card-res">{it.res}</span>
+              </div>
+
+              <div class="card-actions">
+                <a href={it.webUrl} download={it.filename} class="dl-pill" title="Descargar en resolución Web (800px)">
+                  <span>WEB</span>
+                  <span class="dl-size">· {it.webSize}</span>
+                </a>
+                <span class="dl-sep">/</span>
+                <a href={it.altaUrl} download={it.filename} class="dl-pill is-alta" title="Descargar en Alta Resolución (2560px)">
+                  <span>ALTA</span>
+                  <span class="dl-size">· {it.altaSize}</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </section>
+
+      <!-- Bloque de Información & Ficha Técnica -->
+      <section class="vault-dossier-info">
+        <div class="dossier-box">
+          <h2 class="box-heading">BIOGRAFÍA OFICIAL</h2>
+          <div class="box-body">
+            <p>
+              Inspirados en la estética y las corrientes musicales de los años 90, <strong>Anttonias</strong> es una banda de rock alternativo, garage rock y post punk revival formada en 2023, y uno de los nombres clave de la “Nueva Escena” del rock chileno.
+            </p>
+            <p>
+              La integran <strong>Antonia Holzapfel</strong> (voz), <strong>Diego Sansana</strong> (guitarra), <strong>Óscar Concha</strong> (guitarra), <strong>Felipe Sanzana</strong> (bajo) y <strong>Agustín Plaza</strong> (batería).
+            </p>
+          </div>
+        </div>
+
+        <div class="dossier-box">
+          <h2 class="box-heading">FICHA TÉCNICA & CONTACTO</h2>
+          <div class="box-body">
+            <div class="spec-entry">
+              <span class="spec-label">DISCOGRAFÍA:</span>
+              <span>¿Qué tan romántica será la muerte? (LP, Noviembre 2026)</span>
+            </div>
+            <div class="spec-entry">
+              <span class="spec-label">SELLO:</span>
+              <span>Lotus Records / Distribución Warner Music Chile</span>
+            </div>
+            <div class="spec-entry">
+              <span class="spec-label">PRODUCCIÓN:</span>
+              <span>Bastián Grañas & Nicolás Resnikof (Estudios del Sur)</span>
+            </div>
+            <div class="spec-entry">
+              <span class="spec-label">MASTERIZACIÓN:</span>
+              <span>Daniel Osorio</span>
+            </div>
+            <div class="spec-entry">
+              <span class="spec-label">FOTOGRAFÍAS:</span>
+              <span>Claudia Ardid & Emily Brea (2026)</span>
+            </div>
+            <div class="spec-entry contact-highlight">
+              <span class="spec-label">CONTACTO & PRENSA:</span>
+              <a href="mailto:anttoniasoficial.contacto@gmail.com">anttoniasoficial.contacto@gmail.com</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Modal / Visor Lightbox -->
+  <dialog class="vault-modal" id="vault-modal" aria-label="Visor de alta resolución">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-box">
+      <button type="button" class="modal-close-btn" id="modal-close" aria-label="Cerrar visor (Esc)">
+        &times;
+      </button>
+
+      <button type="button" class="modal-nav-btn btn-prev" id="modal-prev" aria-label="Fotografía anterior">
+        &#8592;
+      </button>
+
+      <div class="modal-media-wrap">
+        <img src="" alt="" id="modal-img" class="modal-image" />
+        <div class="modal-bar">
+          <div class="modal-meta">
+            <span class="modal-counter" id="modal-counter">01 / 11</span>
+            <span class="modal-title" id="modal-title"></span>
+            <span class="modal-credits" id="modal-credits"></span>
+          </div>
+          <div class="modal-dl">
+            <a href="#" id="modal-dl-web" download="" class="modal-btn">DESCARGAR WEB</a>
+            <a href="#" id="modal-dl-alta" download="" class="modal-btn is-alta">DESCARGAR ALTA (2560px)</a>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="modal-nav-btn btn-next" id="modal-next" aria-label="Fotografía siguiente">
+        &#8594;
+      </button>
+    </div>
+  </dialog>
+
+  <Footer />
+</Layout>
+
+<style>
+  .vault-page {
+    position: relative;
+    z-index: var(--z-content);
+    padding-top: 6.5rem;
+    padding-bottom: var(--space-xl);
+    background: #080808;
+    color: var(--color-text-primary);
+    min-height: 100vh;
+  }
+
+  .vault-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  /* Encabezado */
+  .vault-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-bottom: 2.5rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  @media (min-width: 860px) {
+    .vault-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+
+  .vault-identity {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .vault-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+  }
+
+  .vault-artist {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    color: #ffffff;
+    margin: 0.25rem 0;
+  }
+
+  .vault-project {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--color-text-muted);
+  }
+
+  .vault-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--color-text-faint);
+  }
+
+  .meta-sep {
+    opacity: 0.35;
+  }
+
+  .vault-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .vault-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .vault-btn.btn-primary {
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #ffffff;
+    font-weight: 600;
+  }
+
+  .vault-btn.btn-primary:disabled {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.3);
+    border-color: transparent;
+    cursor: not-allowed;
+  }
+
+  .vault-btn.btn-primary:not(:disabled):hover {
+    background: transparent;
+    color: #ffffff;
+  }
+
+  .vault-btn.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .vault-btn.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #ffffff;
+  }
+
+  .vault-btn.btn-tertiary {
+    background: transparent;
+    color: var(--color-text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .vault-btn.btn-tertiary:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-badge {
+    background: #000000;
+    color: #ffffff;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    font-size: 0.65rem;
+  }
+
+  .vault-btn:disabled .btn-badge {
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Grilla */
+  .vault-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  @media (min-width: 640px) {
+    .vault-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .vault-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  .vault-card {
+    background: var(--color-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: border-color var(--duration-fast) ease;
+  }
+
+  .vault-card:hover {
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  .vault-card.is-selected {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  .card-media {
+    position: relative;
+    aspect-ratio: 3/2;
+    background: #000000;
+    overflow: hidden;
+  }
+
+  .card-preview-trigger {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+    position: relative;
+  }
+
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s var(--ease-cinematic);
+  }
+
+  .card-preview-trigger:hover .card-img {
+    transform: scale(1.03);
+  }
+
+  .zoom-badge {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .card-preview-trigger:hover .zoom-badge {
+    opacity: 1;
+  }
+
+  .card-select-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 2;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .vault-card.is-selected .card-select-btn {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000000;
+  }
+
+  .check-mark {
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .card-footer {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .card-filename {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    word-break: break-all;
+  }
+
+  .card-credits {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text-faint);
+  }
+
+  .card-res {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .dl-pill {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .dl-pill:hover {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  .dl-pill.is-alta {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .dl-size {
+    color: var(--color-text-faint);
+    font-size: 0.62rem;
+  }
+
+  .dl-sep {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 0.7rem;
+  }
+
+  /* Bloque Dossier Inferior */
+  .vault-dossier-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  @media (min-width: 768px) {
+    .vault-dossier-info {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .dossier-box {
+    padding: 1.75rem;
+    background: var(--color-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .box-heading {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    margin: 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .box-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+  }
+
+  .box-body strong {
+    color: #ffffff;
+  }
+
+  .spec-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  @media (min-width: 500px) {
+    .spec-entry {
+      flex-direction: row;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding-bottom: 0.4rem;
+    }
+  }
+
+  .spec-label {
+    color: var(--color-text-faint);
+  }
+
+  .contact-highlight {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+  }
+
+  .contact-highlight a {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  /* Modal Lightbox */
+  .vault-modal {
+    border: none;
+    background: transparent;
+    padding: 0;
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-modal, 9999);
+  }
+
+  .vault-modal::backdrop {
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(8px);
+  }
+
+  .vault-modal[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-box {
+    position: relative;
+    width: 90vw;
+    max-width: 1200px;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 1.75rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .modal-close-btn:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .modal-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 3rem;
+    height: 3rem;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .modal-nav-btn:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .btn-prev { left: 0.5rem; }
+  .btn-next { right: 0.5rem; }
+
+  .modal-media-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .modal-image {
+    max-width: 82vw;
+    max-height: 75vh;
+    object-fit: contain;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .modal-bar {
+    width: 100%;
+    max-width: 82vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+  }
+
+  .modal-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .modal-counter {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+  }
+
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: #ffffff;
+  }
+
+  .modal-credits {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text-faint);
+  }
+
+  .modal-dl {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .modal-btn {
+    padding: 0.5rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .modal-btn {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .modal-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .modal-btn.is-alta {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+    font-weight: 600;
+  }
+
+  .modal-btn.is-alta:hover {
+    background: transparent;
+    color: #ffffff;
+  }
+</style>
+
+<script>
+  // Items de datos
+  const itemsData = [
+    {
+      id: "photo-01",
+      filename: "Anttonias_Prensa_01_Nocturna.jpg",
+      title: "Anttonias — Sesión Nocturna Exterior",
+      credits: "Fotografía: Emily Brea (2026)",
+      webUrl: "https://vault-anttonias.rod.cl/gallery/photo-01-800.jpg",
+      altaUrl: "https://vault-anttonias.rod.cl/gallery/photo-01-2560.jpg"
+    },
+    {
+      id: "photo-02",
+      filename: "Anttonias_Prensa_02_Antonia.jpg",
+      title: "Antonia Holzapfel — Primer Plano",
+      credits: "Fotografía: Claudia Ardid (2026)",
+      webUrl: "https://vault-anttonias.rod.cl/gallery/photo-02-800.jpg",
+      altaUrl: "https://vault-anttonias.rod.cl/gallery/photo-02-2560.jpg"
+    },
+    {
+      id: "photo-03",
+      filename: "Anttonias_Prensa_03_Cruces.jpg",
+      title: "Anttonias — Entre Sepulcros y Cruces de Hierro",
+      credits: "Fotografía: Claudia Ardid (2026)",
+      webUrl: "https://vault-anttonias.rod.cl/gallery/photo-03-800.jpg",
+      altaUrl: "https://vault-anttonias.rod.cl/gallery/photo-03-2560.jpg"
+    },
+    {
+      id: "photo-04",
+      filename: "Anttonias_Prensa_04_Lapidas.jpg",
+      title: "Anttonias — Detalle de Lápidas",
+      credits: "Fotografía: Claudia Ardid (2026)",
+      webUrl: "https://vault-anttonias.rod.cl/gallery/photo-04-800.jpg",
+      altaUrl: "https://vault-anttonias.rod.cl/gallery/photo-04-2560.jpg"
+    },
+    {
+      id: "photo-05",
+      filename: "Anttonias_Prensa_05_Mausoleo.jpg",
+      title: "Anttonias — Frente al Mausoleo",
+      credits: "Fotografía: Claudia Ardid (2026)",
+      webUrl: "https://vault-anttonias.rod.cl/gallery/photo-05-800.jpg",
+      altaUrl: "https://vault-anttonias.rod.cl/gallery/photo-05-2560.jpg"
+    },
+    {
+      id: "photo-06",
+      filename: "Anttonias_Prensa_06_Guitarras.jpg",
+      title: "Anttonias — Arquitectura y Guitarras",
+      credits: "Fotografía: Claudia Ardid (2026)",
+      webUrl: "https://vault-anttonias.rod.cl/gallery/photo-06-800.jpg",
+      altaUrl: "https://vault-anttonias.rod.cl/gallery/photo-06-2560.jpg"
+    },
+    {
+      id: "photo-07",
+      filename: "Anttonias_Prensa_07_Perspectiva.jpg",
+      title: "Anttonias — Perspectiva Diagonal",
+      credits: "Fotografía: Claudia Ardid (2026)",
+      webUrl: "https://vault-anttonias.rod.cl/gallery/photo-07-800.jpg",
+      altaUrl: "https://vault-anttonias.rod.cl/gallery/photo-07-2560.jpg"
+    },
+    {
+      id: "photo-08",
+      filename: "Anttonias_Prensa_08_Exteriores.jpg",
+      title: "Anttonias — Exteriores Nocturnos",
+      credits: "Fotografía: Emily Brea (2026)",
+      webUrl: "https://vault-anttonias.rod.cl/gallery/photo-08-800.jpg",
+      altaUrl: "https://vault-anttonias.rod.cl/gallery/photo-08-2560.jpg"
+    },
+    {
+      id: "photo-09",
+      filename: "Anttonias_Prensa_09_Criptas.jpg",
+      title: "Anttonias — Pasaje de Criptas",
+      credits: "Fotografía: Claudia Ardid (2026)",
+      webUrl: "https://vault-anttonias.rod.cl/gallery/photo-09-800.jpg",
+      altaUrl: "https://vault-anttonias.rod.cl/gallery/photo-09-2560.jpg"
+    },
+    {
+      id: "photo-10",
+      filename: "Anttonias_Prensa_10_Composicion.jpg",
+      title: "Anttonias — Composición Fúnebre",
+      credits: "Fotografía: Claudia Ardid (2026)",
+      webUrl: "https://vault-anttonias.rod.cl/gallery/photo-10-800.jpg",
+      altaUrl: "https://vault-anttonias.rod.cl/gallery/photo-10-2560.jpg"
+    },
+    {
+      id: "photo-11",
+      filename: "Anttonias_Prensa_11_Vivo_Debut.jpg",
+      title: "Anttonias — En Vivo (Era Debut)",
+      credits: "Fotografía: Rod Hoffmann (2025)",
+      webUrl: "https://vault-anttonias.rod.cl/gallery/photo-11-800.jpg",
+      altaUrl: "https://vault-anttonias.rod.cl/gallery/photo-11-2560.jpg"
+    }
+  ];
+
+  // 1. Gestión de Selección Múltiple
+  const selectedIndices = new Set<number>();
+  const btnDownloadSelected = document.getElementById('btn-download-selected') as HTMLButtonElement | null;
+  const selectedCounter = document.getElementById('selected-counter');
+  const cards = document.querySelectorAll<HTMLElement>('.vault-card');
+
+  function updateSelectionUI() {
+    cards.forEach((c) => {
+      const idx = parseInt(c.dataset.idx || '-1', 10);
+      if (selectedIndices.has(idx)) {
+        c.classList.add('is-selected');
+      } else {
+        c.classList.remove('is-selected');
+      }
+    });
+
+    const count = selectedIndices.size;
+    if (selectedCounter) selectedCounter.textContent = String(count);
+    if (btnDownloadSelected) {
+      btnDownloadSelected.disabled = count === 0;
+    }
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-select-trigger]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const idx = parseInt(btn.dataset.idx || '-1', 10);
+      if (idx >= 0) {
+        if (selectedIndices.has(idx)) {
+          selectedIndices.delete(idx);
+        } else {
+          selectedIndices.add(idx);
+        }
+        updateSelectionUI();
+      }
+    });
+  });
+
+  // Descarga secuencial de la selección
+  if (btnDownloadSelected) {
+    btnDownloadSelected.addEventListener('click', () => {
+      if (selectedIndices.size === 0) return;
+      const toDownload = Array.from(selectedIndices).map(idx => itemsData[idx]);
+      toDownload.forEach((item, i) => {
+        setTimeout(() => {
+          const a = document.createElement('a');
+          a.href = item.altaUrl;
+          a.download = item.filename;
+          a.target = '_blank';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }, i * 350);
+      });
+    });
+  }
+
+  // Descargar todas
+  const btnDownloadAll = document.getElementById('btn-download-all');
+  if (btnDownloadAll) {
+    btnDownloadAll.addEventListener('click', () => {
+      itemsData.forEach((item, i) => {
+        setTimeout(() => {
+          const a = document.createElement('a');
+          a.href = item.altaUrl;
+          a.download = item.filename;
+          a.target = '_blank';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }, i * 350);
+      });
+    });
+  }
+
+  // Copiar enlace de sesión
+  const btnCopyLink = document.getElementById('btn-copy-link');
+  const copyBtnText = document.getElementById('copy-btn-text');
+  if (btnCopyLink && copyBtnText) {
+    btnCopyLink.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        const prev = copyBtnText.textContent;
+        copyBtnText.textContent = '¡ENLACE COPIADO!';
+        setTimeout(() => {
+          copyBtnText.textContent = prev;
+        }, 2200);
+      } catch {
+        prompt('Copia este enlace de prensa:', window.location.href);
+      }
+    });
+  }
+
+  // 2. Lightbox Modal
+  const modal = document.getElementById('vault-modal') as HTMLDialogElement | null;
+  const modalImg = document.getElementById('modal-img') as HTMLImageElement | null;
+  const modalCounter = document.getElementById('modal-counter');
+  const modalTitle = document.getElementById('modal-title');
+  const modalCredits = document.getElementById('modal-credits');
+  const modalDlWeb = document.getElementById('modal-dl-web') as HTMLAnchorElement | null;
+  const modalDlAlta = document.getElementById('modal-dl-alta') as HTMLAnchorElement | null;
+  const modalClose = document.getElementById('modal-close');
+  const modalPrev = document.getElementById('modal-prev');
+  const modalNext = document.getElementById('modal-next');
+
+  let currentModalIdx = 0;
+
+  function renderModal(idx: number) {
+    if (!itemsData[idx]) return;
+    currentModalIdx = idx;
+    const it = itemsData[idx];
+
+    if (modalImg) {
+      modalImg.src = it.altaUrl;
+      modalImg.alt = it.title;
+    }
+    if (modalCounter) {
+      modalCounter.textContent = `${String(idx + 1).padStart(2, '0')} / ${String(itemsData.length).padStart(2, '0')}`;
+    }
+    if (modalTitle) modalTitle.textContent = it.title;
+    if (modalCredits) modalCredits.textContent = it.credits;
+
+    if (modalDlWeb) {
+      modalDlWeb.href = it.webUrl;
+      modalDlWeb.download = it.filename;
+    }
+    if (modalDlAlta) {
+      modalDlAlta.href = it.altaUrl;
+      modalDlAlta.download = it.filename;
+    }
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-zoom-trigger]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.idx || '0', 10);
+      renderModal(idx);
+      if (modal) modal.showModal();
+    });
+  });
+
+  if (modalClose && modal) {
+    modalClose.addEventListener('click', () => modal.close());
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.close();
+    });
+  }
+
+  if (modalPrev) {
+    modalPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const nextIdx = (currentModalIdx - 1 + itemsData.length) % itemsData.length;
+      renderModal(nextIdx);
+    });
+  }
+
+  if (modalNext) {
+    modalNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const nextIdx = (currentModalIdx + 1) % itemsData.length;
+      renderModal(nextIdx);
+    });
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (!modal || !modal.open) return;
+    if (e.key === 'Escape') modal.close();
+    if (e.key === 'ArrowLeft') {
+      const nextIdx = (currentModalIdx - 1 + itemsData.length) % itemsData.length;
+      renderModal(nextIdx);
+    }
+    if (e.key === 'ArrowRight') {
+      const nextIdx = (currentModalIdx + 1) % itemsData.length;
+      renderModal(nextIdx);
+    }
+  });
+</script>

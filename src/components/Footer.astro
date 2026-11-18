@@ -1,13 +1,17 @@
 ---
 // src/components/Footer.astro
 import Logo from './Logo.astro';
+
+const currentPath = Astro.url.pathname;
+const isHome = currentPath === '/' || currentPath === '';
+const prefix = isHome ? '' : '/';
 ---
 
 <footer class="site-footer" aria-label="Pie de página">
   <div class="footer-container">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="#hero" aria-label="Anttonias">
+        <a href={`${prefix}#hero`} aria-label="Anttonias">
           <Logo class="footer-logo-svg" />
           <span class="sr-only">ANTTONIAS</span>
         </a>
@@ -19,11 +23,12 @@ import Logo from './Logo.astro';
       <nav class="footer-nav" aria-label="Navegación secundaria">
         <div class="nav-group">
           <span class="group-title">EXPLORAR</span>
-          <a href="#disco" class="footer-link">QTRSLM</a>
-          <a href="#gira" class="footer-link">FECHAS</a>
-          <a href="#videos" class="footer-link">VIDEOS</a>
-          <a href="#catalogo" class="footer-link">CATÁLOGO</a>
-          <a href="#prensa" class="footer-link">PRENSA</a>
+          <a href={`${prefix}#disco`} class="footer-link">QTRSLM</a>
+          <a href={`${prefix}#gira`} class="footer-link">FECHAS</a>
+          <a href={`${prefix}#videos`} class="footer-link">VIDEOS</a>
+          <a href={`${prefix}#catalogo`} class="footer-link">CATÁLOGO</a>
+          <a href={`${prefix}#contacto`} class="footer-link">CONTACTO</a>
+          <a href="/vault" class="footer-link">VAULT / PRENSA</a>
         </div>
 
         <div class="nav-group">

@@ -11,7 +11,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Cross-Origin-Opener-Policy: same-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://vault-anttonias.rod.cl https://vault.anttonias.rod.cl; font-src 'self'; media-src 'self' https://vault-anttonias.rod.cl; connect-src 'self' https://vault-anttonias.rod.cl https://vault.anttonias.rod.cl https://cloudflareinsights.com; frame-src 'none'; base-uri 'self';
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://vault-anttonias.rod.cl https://vault.anttonias.rod.cl; font-src 'self'; media-src 'self' https://vault-anttonias.rod.cl https://vault.anttonias.rod.cl; connect-src 'self' https://vault-anttonias.rod.cl https://vault.anttonias.rod.cl https://cloudflareinsights.com; frame-src 'none'; base-uri 'self';
 
 # 2. Autodescubrimiento AEO / LLM Knowledge Graph
 /llms.txt

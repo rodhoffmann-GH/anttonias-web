@@ -2,17 +2,17 @@
 // src/components/AlbumFeature.astro
 
 const tracks = [
-  { num: "01", title: "Verlos morir", duration: "3:42" },
-  { num: "02", title: "El dolor", duration: "4:15" },
-  { num: "03", title: "Por los siglos de los siglos", duration: "3:58" },
-  { num: "04", title: "Honestidad", duration: "3:30" },
-  { num: "05", title: "Última palabra", duration: "4:02" },
-  { num: "06", title: "Espíritu", duration: "4:28" },
-  { num: "07", title: "Te obsesionas con sentir", duration: "3:51" },
-  { num: "08", title: "Un ángel disparó", duration: "4:12" },
-  { num: "09", title: "Azul", duration: "5:04" },
-  { num: "10", title: "Almas contra el tiempo", duration: "4:36" },
-  { num: "11", title: "¿Qué tan romántica será la muerte?", duration: "6:18" }
+  { num: "01", title: "Verlos morir", duration: "3:17", preview: "https://vault-anttonias.rod.cl/audio/preview/preview-01.mp3" },
+  { num: "02", title: "El dolor", duration: "3:01", preview: "https://vault-anttonias.rod.cl/audio/preview/preview-02.mp3" },
+  { num: "03", title: "Por los siglos de los siglos", duration: "3:55", preview: "https://vault-anttonias.rod.cl/audio/preview/preview-03.mp3" },
+  { num: "04", title: "Honestidad", duration: "3:37", preview: "https://vault-anttonias.rod.cl/audio/preview/preview-04.mp3" },
+  { num: "05", title: "Última palabra", duration: "4:50", preview: "https://vault-anttonias.rod.cl/audio/preview/preview-05.mp3" },
+  { num: "06", title: "Espíritu", duration: "4:31", preview: "https://vault-anttonias.rod.cl/audio/preview/preview-06.mp3" },
+  { num: "07", title: "Te obsesionas con sentir", duration: "4:04", preview: "https://vault-anttonias.rod.cl/audio/preview/preview-07.mp3" },
+  { num: "08", title: "Un ángel disparó", duration: "4:06", preview: "https://vault-anttonias.rod.cl/audio/preview/preview-08.mp3" },
+  { num: "09", title: "Azul", duration: "2:39", preview: "https://vault-anttonias.rod.cl/audio/preview/preview-09.mp3" },
+  { num: "10", title: "Almas contra el tiempo", duration: "3:07", preview: "https://vault-anttonias.rod.cl/audio/preview/preview-10.mp3" },
+  { num: "11", title: "¿Qué tan romántica será la muerte?", duration: "4:33", preview: "https://vault-anttonias.rod.cl/audio/preview/preview-11.mp3" }
 ];
 ---
 
@@ -68,7 +68,7 @@ const tracks = [
           </div>
           <div class="credit-row">
             <span class="credit-role">PRODUCCIÓN</span>
-            <span class="credit-name">BASTIÁN GRAÑAS & NICOLÁS RESNIKOFF</span>
+            <span class="credit-name">BASTIÁN GRAÑAS & NICOLÁS RESNIKOF</span>
           </div>
           <div class="credit-row">
             <span class="credit-role">MASTERIZACIÓN</span>
@@ -77,16 +77,37 @@ const tracks = [
         </div>
       </div>
 
-      <!-- Columna Derecha: Tracklist Oficial -->
+      <!-- Columna Derecha: Tracklist Oficial con Micro-Player -->
       <div class="album-narrative">
         <div class="tracklist-wrapper">
-          <h3 class="tracklist-heading">TRACKLIST</h3>
-          <ol class="tracklist">
+          <div class="tracklist-header-row">
+            <h3 class="tracklist-heading">TRACKLIST</h3>
+            <span class="preview-hint" id="preview-hint">CLIC EN ▶ PARA ESCUCHAR ADELANTO (15s)</span>
+          </div>
+          <ol class="tracklist" id="tracklist-container">
             {tracks.map(t => (
-              <li class="track-item">
+              <li class="track-item" data-track-item data-num={t.num} data-preview={t.preview}>
+                <button 
+                  type="button" 
+                  class="track-play-btn" 
+                  aria-label={`Reproducir adelanto de 15 segundos: ${t.title}`}
+                  data-play-trigger
+                >
+                  <svg class="icon-play" viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  <svg class="icon-pause" viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                  </svg>
+                </button>
                 <span class="track-num">{t.num}</span>
                 <div class="track-info">
-                  <span class="track-title">{t.title}</span>
+                  <div class="track-title-wrap">
+                    <span class="track-title">{t.title}</span>
+                  </div>
+                  <div class="track-progress" aria-hidden="true">
+                    <div class="track-progress-bar"></div>
+                  </div>
                 </div>
                 <span class="track-dur">{t.duration}</span>
               </li>
@@ -243,14 +264,28 @@ const tracks = [
     gap: 3rem;
   }
 
+  .tracklist-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
   .tracklist-heading {
     font-family: var(--font-mono);
     font-size: 0.78rem;
     letter-spacing: 0.25em;
     color: var(--color-text-muted);
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--color-border);
+    margin: 0;
+  }
+
+  .preview-hint {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: var(--color-text-faint);
   }
 
   .tracklist {
@@ -261,7 +296,7 @@ const tracks = [
   .track-item {
     display: flex;
     align-items: center;
-    padding: 0.95rem 0.5rem;
+    padding: 0.85rem 0.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     transition: background-color var(--duration-fast) ease,
                 padding-left var(--duration-fast) ease;
@@ -270,41 +305,115 @@ const tracks = [
   @media (hover: hover) {
     .track-item:hover {
       background: rgba(255, 255, 255, 0.02);
-      padding-left: 1rem;
+      padding-left: 0.75rem;
     }
+  }
+
+  .track-item.is-playing {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .track-play-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.85rem;
+    height: 1.85rem;
+    min-width: 1.85rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    margin-right: 0.65rem;
+    padding: 0;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .track-play-btn:hover,
+  .track-play-btn:focus-visible {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.35);
+    color: var(--color-text-primary);
+    outline: none;
+  }
+
+  .track-play-btn .icon-pause {
+    display: none;
+  }
+
+  .track-item.is-playing .track-play-btn {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #000000;
+  }
+
+  .track-item.is-playing .track-play-btn .icon-play {
+    display: none;
+  }
+
+  .track-item.is-playing .track-play-btn .icon-pause {
+    display: block;
   }
 
   .track-num {
     font-family: var(--font-mono);
     font-size: 0.78rem;
     color: var(--color-text-faint);
-    width: 2.5rem;
+    width: 2.2rem;
   }
 
   .track-info {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+
+  .track-title-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
   }
 
   .track-title {
     font-family: var(--font-display);
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     letter-spacing: 0.05em;
     color: var(--color-text-primary);
   }
 
-  .track-act {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--color-text-faint);
+  .track-progress {
+    position: relative;
+    width: 100%;
+    max-width: 240px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.06);
+    margin-top: 0.25rem;
+    border-radius: 1px;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .track-item.is-playing .track-progress,
+  .track-item.is-buffering .track-progress {
+    opacity: 1;
+  }
+
+  .track-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #ffffff;
+    transition: width 0.1s linear;
   }
 
   .track-dur {
     font-family: var(--font-mono);
     font-size: 0.78rem;
     color: var(--color-text-muted);
+    margin-left: 0.5rem;
   }
 
   /* ==========================================================================
@@ -323,24 +432,42 @@ const tracks = [
       letter-spacing: 0.14em;
     }
 
-    .tracklist-heading {
-      text-align: center;
+    .tracklist-header-row {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
       margin-bottom: 0.75rem;
     }
 
+    .tracklist-heading {
+      text-align: center;
+    }
+
+    .preview-hint {
+      font-size: 0.58rem;
+      text-align: center;
+    }
+
     .track-item {
-      padding: 0.42rem 0.15rem;
+      padding: 0.5rem 0.15rem;
       transition: none;
+    }
+
+    .track-play-btn {
+      width: 2rem;
+      height: 2rem;
+      min-width: 2rem;
+      margin-right: 0.5rem;
     }
 
     .track-num {
       font-size: 0.7rem;
-      width: 1.85rem;
+      width: 1.65rem;
     }
 
     .track-title {
-      font-size: 0.92rem;
-      letter-spacing: 0.04em;
+      font-size: 0.88rem;
+      letter-spacing: 0.03em;
     }
 
     .track-dur {
@@ -352,3 +479,90 @@ const tracks = [
     }
   }
 </style>
+
+<script>
+  let activeAudio: HTMLAudioElement | null = null;
+  let currentItem: HTMLElement | null = null;
+
+  function resetCurrent() {
+    if (currentItem) {
+      currentItem.classList.remove('is-playing', 'is-buffering');
+      const bar = currentItem.querySelector<HTMLElement>('.track-progress-bar');
+      if (bar) bar.style.width = '0%';
+      const btn = currentItem.querySelector<HTMLButtonElement>('[data-play-trigger]');
+      const title = currentItem.querySelector('.track-title')?.textContent?.trim() || '';
+      if (btn) btn.setAttribute('aria-label', `Reproducir adelanto de 15 segundos: ${title}`);
+      currentItem = null;
+    }
+  }
+
+  const trackItems = document.querySelectorAll<HTMLElement>('[data-track-item]');
+
+  trackItems.forEach((item) => {
+    const btn = item.querySelector<HTMLButtonElement>('[data-play-trigger]');
+    const previewUrl = item.dataset.preview;
+    const title = item.querySelector('.track-title')?.textContent?.trim() || '';
+
+    if (!btn || !previewUrl) return;
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      // Si hace clic en el tema que ya está sonando -> pausar
+      if (currentItem === item && activeAudio && !activeAudio.paused) {
+        activeAudio.pause();
+        item.classList.remove('is-playing');
+        btn.setAttribute('aria-label', `Reanudar adelanto de 15 segundos: ${title}`);
+        return;
+      }
+
+      // Si estaba en pausa en este mismo tema -> reanudar
+      if (currentItem === item && activeAudio && activeAudio.paused) {
+        activeAudio.play().then(() => {
+          item.classList.add('is-playing');
+          btn.setAttribute('aria-label', `Pausar adelanto de 15 segundos: ${title}`);
+        }).catch(() => {});
+        return;
+      }
+
+      // Detener cualquier reproducción previa
+      if (activeAudio) {
+        activeAudio.pause();
+        activeAudio.src = '';
+      }
+      resetCurrent();
+
+      // Activar nuevo tema
+      currentItem = item;
+      item.classList.add('is-buffering', 'is-playing');
+      btn.setAttribute('aria-label', `Pausar adelanto de 15 segundos: ${title}`);
+
+      activeAudio = new Audio(previewUrl);
+      activeAudio.preload = 'auto';
+
+      activeAudio.addEventListener('timeupdate', () => {
+        if (!activeAudio || currentItem !== item) return;
+        const duration = activeAudio.duration && isFinite(activeAudio.duration) ? activeAudio.duration : 15;
+        const progress = (activeAudio.currentTime / duration) * 100;
+        const bar = item.querySelector<HTMLElement>('.track-progress-bar');
+        if (bar) bar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+      });
+
+      activeAudio.addEventListener('ended', () => {
+        resetCurrent();
+      });
+
+      activeAudio.addEventListener('error', () => {
+        resetCurrent();
+      });
+
+      activeAudio.play().then(() => {
+        item.classList.remove('is-buffering');
+        item.classList.add('is-playing');
+      }).catch((err) => {
+        console.warn('Audio preview error:', err);
+        resetCurrent();
+      });
+    });
+  });
+</script>
