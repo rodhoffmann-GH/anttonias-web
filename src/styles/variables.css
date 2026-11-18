@@ -43,11 +43,11 @@
   --accent-blood: color(display-p3 0.48 0.08 0.05);
 
   /* ------------------------------------------------------------------------
-     3. TIPOGRAFÍA
+     3. TIPOGRAFÍA (Dúo Unificado: Cinzel + JetBrains Mono)
      ------------------------------------------------------------------------ */
   --font-display: 'Cinzel', 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
-  --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: var(--font-mono);
 
   /* Escala Fluida (clamp) */
   --font-size-hero: clamp(2.75rem, 8vw + 1rem, 7.5rem);
