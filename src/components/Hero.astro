@@ -103,28 +103,56 @@ import Logo from './Logo.astro';
   const toggleButtons = document.querySelectorAll<HTMLButtonElement>('.media-toggle .toggle-btn');
   const allVideos = document.querySelectorAll<HTMLVideoElement>('.hero-media-wrapper video');
 
-  function fallbackToHeroPhoto() {
+  const isMobileHero = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
+  let pendingMobileVideoId: string | null = null;
+  let manualOverride = false;
+
+  function setActiveMedia(target: string) {
     if (!wrapper) return;
-    wrapper.setAttribute('data-active-media', 'photo');
+    wrapper.setAttribute('data-active-media', target);
     toggleButtons.forEach((b) => {
-      b.classList.toggle('active', b.getAttribute('data-target') === 'photo');
+      b.classList.toggle('active', b.getAttribute('data-target') === target);
     });
   }
 
-  function safePlayVideo(vid: HTMLVideoElement | null) {
+  function safePlayVideo(vid: HTMLVideoElement | null, mediaId: string) {
     if (!vid) return;
     const promise = vid.play();
     if (promise !== undefined) {
       promise.catch(() => {
-        // iOS Low Power Mode o bloqueo de autoplay: cambiar limpio a foto oficial sin mostrar ▶ nativo
-        fallbackToHeroPhoto();
+        // Solo en móvil: mostrar foto limpia mientras espera primer toque para intentar reanudar
+        if (!isMobileHero) return;
+        pendingMobileVideoId = mediaId;
+        setActiveMedia('photo');
       });
     }
   }
 
+  if (isMobileHero) {
+    const resumeOnFirstTouch = () => {
+      if (manualOverride || !pendingMobileVideoId) return;
+      const vidId = pendingMobileVideoId;
+      const vid = document.getElementById(`video-${vidId}`) as HTMLVideoElement | null;
+      if (!vid) return;
+      vid.play()
+        .then(() => {
+          pendingMobileVideoId = null;
+          setActiveMedia(vidId);
+        })
+        .catch(() => {
+          // Sigue bloqueado (ej. Low Power Mode estricto): mantener foto limpia
+          pendingMobileVideoId = null;
+          setActiveMedia('photo');
+        });
+    };
+
+    window.addEventListener('touchstart', resumeOnFirstTouch, { once: true, passive: true });
+    window.addEventListener('pointerdown', resumeOnFirstTouch, { once: true, passive: true });
+  }
+
   // Reproducir loop activo por defecto (Verlos morir)
   const defaultVideo = document.getElementById('video-verlos') as HTMLVideoElement | null;
-  safePlayVideo(defaultVideo);
+  safePlayVideo(defaultVideo, 'verlos');
 
   // Pausar video cuando el Hero sale de pantalla para liberar 100% de GPU en mobile/desktop
   const heroSection = document.getElementById('hero');
@@ -136,7 +164,7 @@ import Logo from './Logo.astro';
           const vid = document.getElementById(`video-${currentActive}`) as HTMLVideoElement | null;
           if (vid) {
             if (entry.isIntersecting) {
-              safePlayVideo(vid);
+              safePlayVideo(vid, currentActive);
             } else {
               vid.pause();
             }
@@ -152,7 +180,9 @@ import Logo from './Logo.astro';
       const target = btn.getAttribute('data-target');
       if (!target || !wrapper) return;
 
-      wrapper.setAttribute('data-active-media', target);
+      manualOverride = true;
+      pendingMobileVideoId = null;
+      setActiveMedia(target);
       toggleButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
