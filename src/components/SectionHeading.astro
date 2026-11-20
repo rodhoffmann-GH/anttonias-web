@@ -1,6 +1,7 @@
 ---
 // src/components/SectionHeading.astro
 // Encabezado canónico centrado con ornamento "Filete Degradado" (84px medio, tono hueso)
+// y revelado Scroll-Driven: desenfoque -> enfoque al entrar en pantalla.
 interface Props {
   class?: string;
 }
@@ -8,7 +9,7 @@ interface Props {
 const { class: className = '' } = Astro.props;
 ---
 
-<div class={`section-heading-wrap ${className}`}>
+<div class={`section-heading-wrap ${className}`} data-section-heading>
   <span class="heading-ornament is-left" aria-hidden="true">
     <span class="ornament-line"></span>
     <span class="ornament-dot"></span>
@@ -32,6 +33,7 @@ const { class: className = '' } = Astro.props;
     gap: 1.25rem;
     width: 100%;
     margin-bottom: var(--space-lg);
+    will-change: opacity, filter, transform;
   }
 
   .section-title {
@@ -74,6 +76,46 @@ const { class: className = '' } = Astro.props;
     background-color: rgba(240, 237, 230, 0.9);
   }
 
+  @keyframes heading-focus-in {
+    from {
+      opacity: 0.15;
+      filter: blur(8px);
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .section-heading-wrap {
+        animation: heading-focus-in linear both;
+        animation-timeline: view();
+        animation-range: entry 5% cover 38%;
+      }
+    }
+
+    @supports not (animation-timeline: view()) {
+      .section-heading-wrap {
+        opacity: 0.15;
+        filter: blur(8px);
+        transform: translateY(14px);
+        transition: opacity 0.75s var(--ease-cinematic),
+                    filter 0.75s var(--ease-cinematic),
+                    transform 0.75s var(--ease-cinematic);
+      }
+
+      .section-heading-wrap.is-in-view {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
+    }
+  }
+
   @media (max-width: 768px) {
     .section-heading-wrap {
       gap: 0.75rem;
@@ -89,3 +131,26 @@ const { class: className = '' } = Astro.props;
     }
   }
 </style>
+
+<script>
+  // Fallback ligero solo para navegadores sin animation-timeline: view() (ej. Firefox)
+  if (
+    typeof window !== 'undefined' &&
+    !CSS.supports('animation-timeline: view()') &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ) {
+    const headings = document.querySelectorAll<HTMLElement>('[data-section-heading]');
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    headings.forEach((h) => io.observe(h));
+  }
+</script>
